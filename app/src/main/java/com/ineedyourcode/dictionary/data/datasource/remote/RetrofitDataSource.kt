@@ -1,5 +1,6 @@
 package com.ineedyourcode.dictionary.data.datasource.remote
 
+import com.ineedyourcode.dictionary.domain.ResponseCodes
 import com.ineedyourcode.dictionary.domain.entity.TranslationResult
 import com.ineedyourcode.dictionary.domain.usecase.WordTranslateUsecase
 import io.reactivex.rxjava3.core.Single
@@ -21,15 +22,11 @@ class RetrofitDataSource : WordTranslateUsecase {
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-            .client(createClient())
+            .client(OkHttpClient.Builder()
+                .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                .build())
             .build()
             .create(SkyengApi::class.java)
-    }
-
-    private fun createClient(): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .build()
     }
 
     override fun translate(word: String): Single<List<TranslationResult>> {
@@ -39,7 +36,8 @@ class RetrofitDataSource : WordTranslateUsecase {
                     if (it.isNotEmpty()) {
                         emitter.onSuccess(mapper.convertTranslationResultDtoListToEntity(it))
                     } else {
-                        emitter.onError(NullPointerException("Некорректный запрос"))
+                        emitter.onError(
+                            NullPointerException(ResponseCodes.INVALID_REQUEST.code))
                     }
                 },
                 onError = { emitter.onError(it) }
