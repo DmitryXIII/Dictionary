@@ -1,18 +1,14 @@
 package com.ineedyourcode.dictionary.data.datasource.remote
 
-import com.ineedyourcode.dictionary.data.datasource.remote.dto.TranslationResultDto
 import com.ineedyourcode.dictionary.domain.entity.TranslationResult
 import com.ineedyourcode.dictionary.domain.usecase.WordTranslateUsecase
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.kotlin.subscribeBy
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 private const val BASE_URL = "https://dictionary.skyeng.ru/api/public/v1/"
 
@@ -37,6 +33,17 @@ class RetrofitDataSource : WordTranslateUsecase {
     }
 
     override fun translate(word: String): Single<List<TranslationResult>> {
-        return retrofit.translate(word).map { mapper.convertTranslationResultDtoListToEntity(it) }
+        return Single.create { emitter ->
+            retrofit.translate(word).subscribeBy(
+                onSuccess = {
+                    if (it.isNotEmpty()) {
+                        emitter.onSuccess(mapper.convertTranslationResultDtoListToEntity(it))
+                    } else {
+                        emitter.onError(NullPointerException("Некорректный запрос"))
+                    }
+                },
+                onError = { emitter.onError(it) }
+            )
+        }
     }
 }

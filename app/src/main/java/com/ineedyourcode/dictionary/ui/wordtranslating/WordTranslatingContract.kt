@@ -5,6 +5,8 @@ import com.ineedyourcode.dictionary.domain.entity.TranslationResult
 interface WordTranslatingViewContract {
     fun showTranslatingResult(result: List<TranslationResult>)
     fun showTranslatingError(error: String)
+    fun showProgress()
+    fun hideProgress()
 }
 
 interface WordTranslatingFragmentPresenterContract {

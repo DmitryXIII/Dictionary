@@ -9,22 +9,33 @@ class WordTranslatingFragmentPresenter : WordTranslatingFragmentPresenterContrac
 
     private val repository: WordTranslateUsecase = RetrofitDataSource()
 
-    private var targetFragment: WordTranslatingViewContract? = null
+    private var targetView: WordTranslatingViewContract? = null
 
     override fun onAttach(fragment: WordTranslatingViewContract) {
-        targetFragment = fragment
+        targetView = fragment
     }
 
     override fun searchWord(word: String) {
-        repository.translate(word)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = { targetFragment?.showTranslatingResult(it) },
-                onError = { targetFragment?.showTranslatingError(it.message.toString()) }
-            )
+        if (word.isNotEmpty()) {
+            targetView?.showProgress()
+            repository.translate(word)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                    onSuccess = {
+                        targetView?.hideProgress()
+                        targetView?.showTranslatingResult(it)
+                    },
+                    onError = {
+                        targetView?.hideProgress()
+                        targetView?.showTranslatingError(it.message.toString())
+                    }
+                )
+        } else {
+            targetView?.showTranslatingError("Введите слово")
+        }
     }
 
     override fun onDetach() {
-        targetFragment = null
+        targetView = null
     }
 }

@@ -3,6 +3,7 @@ package com.ineedyourcode.dictionary.ui.wordtranslating
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.ineedyourcode.dictionary.R
 import com.ineedyourcode.dictionary.databinding.FragmentWordTraslatingBinding
@@ -34,6 +35,14 @@ class WordTranslatingFragment : Fragment(R.layout.fragment_word_traslating),
 
     override fun showTranslatingError(error: String) {
         Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showProgress() {
+        binding.translateWordProgressBar.isVisible = true
+    }
+
+    override fun hideProgress() {
+        binding.translateWordProgressBar.isVisible = false
     }
 
     override fun onDestroyView() {
