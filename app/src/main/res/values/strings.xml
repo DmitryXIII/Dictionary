@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Dictionary</string>
+    <string name="translated_word_example">Переведенное слово</string>
+    <string name="translated_word_description_example">Описание переведенного слова</string>
 </resources>
