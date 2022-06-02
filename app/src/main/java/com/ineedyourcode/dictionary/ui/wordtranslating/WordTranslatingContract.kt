@@ -1,13 +1,14 @@
 package com.ineedyourcode.dictionary.ui.wordtranslating
 
-import com.ineedyourcode.dictionary.domain.entity.TranslatingResult
+import com.ineedyourcode.dictionary.domain.entity.TranslationResult
 
-interface WordTranslatingFragmentContract {
-    fun showTranslatingResult(result: TranslatingResult)
+interface WordTranslatingViewContract {
+    fun showTranslatingResult(result: List<TranslationResult>)
+    fun showTranslatingError(error: String)
 }
 
 interface WordTranslatingFragmentPresenterContract {
-    fun onAttach(fragment: WordTranslatingFragmentContract)
+    fun onAttach(fragment: WordTranslatingViewContract)
     fun onDetach()
     fun searchWord(word: String)
 }
