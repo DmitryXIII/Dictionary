@@ -1,6 +1,6 @@
 package com.ineedyourcode.dictionary.domain.entity
 
-data class TranslationResult(
+data class SearchingResult(
     val wordTranslation: String,
     val wordDescription: String
 )

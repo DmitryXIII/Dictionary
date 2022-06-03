@@ -33,14 +33,28 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/word_translate_recycler_view"
         android:layout_width="@dimen/zero_value"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/zero_value"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/word_translate_input_layout" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie"
+        android:layout_width="@dimen/zero_value"
+        android:layout_height="@dimen/zero_value"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/word_translate_input_layout"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/lottie_translate" />
+
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/translate_word_progress_bar"
-        style="@style/SpinKitView.Pulse"
+        style="@style/SpinKitView.Circle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"

@@ -3,7 +3,7 @@ package com.ineedyourcode.dictionary.data.datasource.remote.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class TranslationResultDto(
+data class SearchingResultDto(
     @SerializedName("id")
     val id: Int,
     @SerializedName("meanings")
