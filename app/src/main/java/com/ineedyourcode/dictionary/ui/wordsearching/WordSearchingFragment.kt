@@ -6,16 +6,23 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ineedyourcode.dictionary.App
+import com.ineedyourcode.dictionary.app
 import com.ineedyourcode.dictionary.databinding.FragmentWordSearchingBinding
 import com.ineedyourcode.dictionary.domain.entity.SearchingResult
+import com.ineedyourcode.dictionary.domain.usecase.WordSearchingUsecase
 import com.ineedyourcode.dictionary.ui.BaseFragment
 import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
 import com.ineedyourcode.dictionary.ui.uils.hideKeyboard
 import com.ineedyourcode.dictionary.ui.uils.showErrorSnack
+import javax.inject.Inject
+import javax.inject.Named
 
 const val ANIMATION_DURATION = 100L
 const val ANIMATION_ALPHA_VISIBLE = 1f
 const val ANIMATION_ALPHA_INVISIBLE = 0f
+
+private const val GATEWAY_NAME = "Gateway"
 
 class WordSearchingFragment :
     BaseFragment<FragmentWordSearchingBinding>(FragmentWordSearchingBinding::inflate),
@@ -23,11 +30,19 @@ class WordSearchingFragment :
 
     private val wordTranslateAdapter = WordSearchingFragmentRecyclerViewAdapter()
 
+    @Inject
+    @Named(GATEWAY_NAME)
+    lateinit var gateway: WordSearchingUsecase
+
     private val viewModel: WordSearchingViewModelContract.BaseViewModel<WordSearchingState>
-            by viewModels<WordSearchingViewModel>()
+            by viewModels<WordSearchingViewModel> {
+                WordSearchingViewModelFactory(gateway)
+            }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        requireActivity().app.appDependenciesComponent.inject(this)
 
         viewModel.getData().observe(viewLifecycleOwner) {
             renderData(it)

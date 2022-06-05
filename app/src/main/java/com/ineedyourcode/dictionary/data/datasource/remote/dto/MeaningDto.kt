@@ -3,7 +3,7 @@ package com.ineedyourcode.dictionary.data.datasource.remote.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class Meaning(
+data class MeaningDto(
     @SerializedName("id")
     val id: Int,
     @SerializedName("imageUrl")
@@ -17,5 +17,5 @@ data class Meaning(
     @SerializedName("transcription")
     val transcription: String,
     @SerializedName("translation")
-    val translation: Translation
+    val translation: TranslationDto
 )

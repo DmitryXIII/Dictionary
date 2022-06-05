@@ -7,7 +7,7 @@ data class SearchingResultDto(
     @SerializedName("id")
     val id: Int,
     @SerializedName("meanings")
-    val meanings: List<Meaning>,
+    val meanings: List<MeaningDto>,
     @SerializedName("text")
     val text: String
 )
