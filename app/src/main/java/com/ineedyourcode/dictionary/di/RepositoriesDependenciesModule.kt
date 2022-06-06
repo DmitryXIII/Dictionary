@@ -17,8 +17,9 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 private const val BASE_URL = "https://dictionary.skyeng.ru/api/public/v1/"
-private const val GATEWAY_NAME = "Gateway"
-private const val DATASOURCE_NAME = "DataSource"
+private const val BUILD_CONFIG_TYPE_DEBUG = "debug"
+const val DATASOURCE_NAME = "DataSource"
+const val GATEWAY_NAME = "Gateway"
 
 @Module
 class RepositoriesDependenciesModule {
@@ -41,7 +42,7 @@ class RepositoriesDependenciesModule {
     fun provideRetrofit(): SkyengApi {
         val retrofit = Retrofit.Builder()
 
-        if (BuildConfig.BUILD_TYPE == "debug") {
+        if (BuildConfig.BUILD_TYPE == BUILD_CONFIG_TYPE_DEBUG) {
             retrofit.client(OkHttpClient.Builder()
                 .addInterceptor(
                     HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))

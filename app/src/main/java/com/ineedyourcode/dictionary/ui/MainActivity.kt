@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.ineedyourcode.dictionary.R
 import com.ineedyourcode.dictionary.ui.wordsearching.WordSearchingFragment
-import com.ineedyourcode.dictionary.ui.wordsearching.WordSearchingViewContract
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

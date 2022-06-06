@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ineedyourcode.dictionary.app
 import com.ineedyourcode.dictionary.databinding.FragmentWordSearchingBinding
+import com.ineedyourcode.dictionary.di.GATEWAY_NAME
 import com.ineedyourcode.dictionary.domain.entity.SearchingResult
 import com.ineedyourcode.dictionary.domain.usecase.WordSearchingUsecase
 import com.ineedyourcode.dictionary.ui.BaseFragment
@@ -21,11 +22,8 @@ const val ANIMATION_DURATION = 100L
 const val ANIMATION_ALPHA_VISIBLE = 1f
 const val ANIMATION_ALPHA_INVISIBLE = 0f
 
-private const val GATEWAY_NAME = "Gateway"
-
 class WordSearchingFragment :
-    BaseFragment<FragmentWordSearchingBinding>(FragmentWordSearchingBinding::inflate),
-    WordSearchingViewContract {
+    BaseFragment<FragmentWordSearchingBinding>(FragmentWordSearchingBinding::inflate) {
 
     private val wordTranslateAdapter = WordSearchingFragmentRecyclerViewAdapter()
 
@@ -33,13 +31,19 @@ class WordSearchingFragment :
     @Named(GATEWAY_NAME)
     lateinit var gateway: WordSearchingUsecase
 
-    private val viewModel: WordSearchingViewModelContract.BaseViewModel
+    private val stateSavingViewModel: StateSavingViewModel by viewModels()
+
+    override val viewModel: WordSearchingViewModelContract.BaseViewModel
             by viewModels<WordSearchingViewModel> {
                 WordSearchingViewModelFactory(gateway)
             }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        stateSavingViewModel.data.observe(viewLifecycleOwner) {
+            binding.lottie.alpha = it
+        }
 
         requireActivity().app.appDependenciesComponent.inject(this)
 
@@ -65,6 +69,11 @@ class WordSearchingFragment :
         }
     }
 
+    private fun searchWord() {
+        hideKeyboard()
+        viewModel.searchWord(binding.wordTranslateEditText.text.toString())
+    }
+
     override fun renderData(state: WordSearchingState) {
         when (state) {
             WordSearchingState.Loading -> {
@@ -81,11 +90,6 @@ class WordSearchingFragment :
         }
     }
 
-    private fun searchWord() {
-        hideKeyboard()
-        viewModel.searchWord(binding.wordTranslateEditText.text.toString())
-    }
-
     override fun showTranslatingResult(result: List<SearchingResult>) {
         wordTranslateAdapter.setData(result)
         binding.wordTranslateRecyclerView.adapter = wordTranslateAdapter
@@ -95,16 +99,12 @@ class WordSearchingFragment :
         wordTranslateAdapter.clearData()
         binding.wordTranslateRecyclerView.adapter = wordTranslateAdapter
         binding.wordTranslateRecyclerView.isVisible = false
-        binding.lottie.animate()
-            .alpha(ANIMATION_ALPHA_VISIBLE)
-            .duration = ANIMATION_DURATION
+        animateLottie(ANIMATION_ALPHA_VISIBLE)
         binding.root.showErrorSnack(error)
     }
 
     override fun showProgress() {
-        binding.lottie.animate()
-            .alpha(ANIMATION_ALPHA_INVISIBLE)
-            .duration = ANIMATION_DURATION
+        animateLottie(ANIMATION_ALPHA_INVISIBLE)
         binding.wordTranslateRecyclerView.isVisible = false
         binding.translateWordProgressBar.isVisible = true
     }
@@ -121,5 +121,14 @@ class WordSearchingFragment :
     override fun onDestroyView() {
         binding.wordTranslateRecyclerView.adapter = null
         super.onDestroyView()
+    }
+
+    private fun animateLottie(alpha: Float) {
+        binding.lottie.animate()
+            .alpha(alpha)
+            .withEndAction {
+                stateSavingViewModel.saveLottieVisibilityState(binding.lottie.alpha)
+            }
+            .duration = ANIMATION_DURATION
     }
 }

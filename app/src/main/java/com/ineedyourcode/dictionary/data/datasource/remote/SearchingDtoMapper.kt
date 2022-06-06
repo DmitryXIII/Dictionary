@@ -1,6 +1,5 @@
 package com.ineedyourcode.dictionary.data.datasource.remote
 
-import com.ineedyourcode.dictionary.data.datasource.remote.dto.MeaningDto
 import com.ineedyourcode.dictionary.data.datasource.remote.dto.SearchingResultDto
 import com.ineedyourcode.dictionary.domain.entity.SearchingResult
 
