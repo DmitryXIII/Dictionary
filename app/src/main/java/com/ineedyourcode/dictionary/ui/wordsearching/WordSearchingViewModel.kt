@@ -2,12 +2,13 @@ package com.ineedyourcode.dictionary.ui.wordsearching
 
 import androidx.lifecycle.MutableLiveData
 import com.ineedyourcode.dictionary.domain.entity.ResponseCodes
+import com.ineedyourcode.dictionary.domain.entity.SearchingResult
 import com.ineedyourcode.dictionary.domain.usecase.WordSearchingUsecase
 import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
 import io.reactivex.rxjava3.kotlin.subscribeBy
 
 class WordSearchingViewModel(private val gateway: WordSearchingUsecase) :
-    WordSearchingViewModelContract.BaseViewModel<WordSearchingState>() {
+    WordSearchingViewModelContract.BaseViewModel() {
     override val liveData: MutableLiveData<WordSearchingState> = MutableLiveData()
 
     override fun searchWord(word: String) {

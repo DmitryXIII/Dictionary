@@ -13,14 +13,14 @@ class WordSearchingFragmentRecyclerViewAdapter :
 
     fun setData(resultList: List<SearchingResult>) {
         dataList = listOf()
-        notifyItemRangeRemoved(0, dataList.size - 1)
+        notifyItemRangeRemoved(0, dataList.lastIndex)
         dataList = resultList
-        notifyItemRangeInserted(0, dataList.size - 1)
+        notifyItemRangeInserted(0, dataList.lastIndex)
     }
 
     fun clearData() {
         dataList = listOf()
-        notifyItemRangeRemoved(0, dataList.size - 1)
+        notifyItemRangeRemoved(0, dataList.lastIndex)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordTranslatingViewHolder {

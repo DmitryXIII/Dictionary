@@ -15,8 +15,8 @@ interface WordSearchingViewContract {
 }
 
 interface WordSearchingViewModelContract {
-    abstract class BaseViewModel<T> : ViewModel() {
-        abstract val liveData: LiveData<T>
+    abstract class BaseViewModel : ViewModel() {
+        abstract val liveData: LiveData<WordSearchingState>
         abstract fun searchWord(word: String)
         fun getData() = liveData
     }

@@ -1,5 +1,6 @@
 package com.ineedyourcode.dictionary.di
 
+import com.ineedyourcode.dictionary.BuildConfig
 import com.ineedyourcode.dictionary.data.datasource.remote.RetrofitDataSource
 import com.ineedyourcode.dictionary.data.datasource.remote.SearchingDtoMapper
 import com.ineedyourcode.dictionary.data.datasource.remote.SkyengApi
@@ -38,16 +39,22 @@ class RepositoriesDependenciesModule {
     @Singleton
     @Provides
     fun provideRetrofit(): SkyengApi {
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-            .client(OkHttpClient.Builder()
+        val retrofit = Retrofit.Builder()
+
+        if (BuildConfig.BUILD_TYPE == "debug") {
+            retrofit.client(OkHttpClient.Builder()
                 .addInterceptor(
                     HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build())
-            .build()
-            .create(SkyengApi::class.java)
+        }
+
+        retrofit.apply {
+            baseUrl(BASE_URL)
+            addConverterFactory(GsonConverterFactory.create())
+            addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+        }
+
+        return retrofit.build().create(SkyengApi::class.java)
     }
 
     @Provides

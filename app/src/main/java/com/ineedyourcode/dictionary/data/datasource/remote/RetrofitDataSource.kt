@@ -5,7 +5,6 @@ import com.ineedyourcode.dictionary.domain.entity.SearchingResult
 import com.ineedyourcode.dictionary.domain.usecase.WordSearchingUsecase
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.kotlin.subscribeBy
-import retrofit2.Retrofit
 
 class RetrofitDataSource(
     private val retrofit: SkyengApi,

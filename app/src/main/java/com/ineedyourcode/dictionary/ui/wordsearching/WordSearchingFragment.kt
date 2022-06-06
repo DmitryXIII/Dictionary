@@ -6,7 +6,6 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ineedyourcode.dictionary.App
 import com.ineedyourcode.dictionary.app
 import com.ineedyourcode.dictionary.databinding.FragmentWordSearchingBinding
 import com.ineedyourcode.dictionary.domain.entity.SearchingResult
@@ -34,7 +33,7 @@ class WordSearchingFragment :
     @Named(GATEWAY_NAME)
     lateinit var gateway: WordSearchingUsecase
 
-    private val viewModel: WordSearchingViewModelContract.BaseViewModel<WordSearchingState>
+    private val viewModel: WordSearchingViewModelContract.BaseViewModel
             by viewModels<WordSearchingViewModel> {
                 WordSearchingViewModelFactory(gateway)
             }
