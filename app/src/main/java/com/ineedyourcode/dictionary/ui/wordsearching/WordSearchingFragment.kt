@@ -13,6 +13,7 @@ import com.ineedyourcode.dictionary.domain.entity.SearchingResult
 import com.ineedyourcode.dictionary.domain.usecase.WordSearchingUsecase
 import com.ineedyourcode.dictionary.ui.BaseFragment
 import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
+import com.ineedyourcode.dictionary.ui.uils.NoConnectionDialogFragment
 import com.ineedyourcode.dictionary.ui.uils.hideKeyboard
 import com.ineedyourcode.dictionary.ui.uils.showErrorSnack
 import javax.inject.Inject
@@ -70,23 +71,9 @@ class WordSearchingFragment :
     }
 
     private fun searchWord() {
-        hideKeyboard()
-        viewModel.searchWord(binding.wordTranslateEditText.text.toString())
-    }
-
-    override fun renderData(state: WordSearchingState) {
-        when (state) {
-            WordSearchingState.Loading -> {
-                showProgress()
-            }
-            is WordSearchingState.Success -> {
-                hideProgress()
-                showTranslatingResult(state.searchResult)
-            }
-            is WordSearchingState.Error -> {
-                hideProgress()
-                showTranslatingError(state.error)
-            }
+        ifConnectedToInternet {
+            hideKeyboard()
+            viewModel.searchWord(binding.wordTranslateEditText.text.toString())
         }
     }
 
