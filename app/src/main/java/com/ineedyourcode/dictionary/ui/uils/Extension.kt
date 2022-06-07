@@ -1,8 +1,6 @@
 package com.ineedyourcode.dictionary.ui.uils
 
 import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.google.android.material.snackbar.Snackbar

@@ -7,12 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.ineedyourcode.dictionary.R
-import com.ineedyourcode.dictionary.domain.entity.SearchingResult
 import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
-import com.ineedyourcode.dictionary.ui.wordsearching.WordSearchingState
+import com.ineedyourcode.dictionary.ui.uils.hideKeyboard
 import com.ineedyourcode.dictionary.ui.wordsearching.WordSearchingViewModelContract
 
-abstract class BaseFragment<VB : ViewBinding>(
+abstract class BaseFragment<VB : ViewBinding, T>(
     private val inflateBinding: (
         inflater: LayoutInflater,
         root: ViewGroup?,
@@ -50,33 +49,33 @@ abstract class BaseFragment<VB : ViewBinding>(
         _binding = null
     }
 
-    abstract fun showTranslatingResult(result: List<SearchingResult>)
+    abstract fun showTranslatingResult(result: T)
     abstract fun showTranslatingError(error: ErrorMapper)
+    abstract fun showProgress()
+    abstract fun hideProgress()
 
-    protected fun renderData(state: WordSearchingState) {
-        when(state) {
-            WordSearchingState.Loading -> {
+    protected fun renderData(state: AppState) {
+        when (state) {
+            AppState.Loading -> {
                 showProgress()
             }
 
-            is WordSearchingState.Success -> {
+            is AppState.Success -> {
                 hideProgress()
-                showTranslatingResult(state.searchResult)
+                @Suppress("UNCHECKED_CAST")
+                showTranslatingResult(state.result as T)
             }
 
-            is WordSearchingState.Error -> {
+            is AppState.Error -> {
                 hideProgress()
                 showTranslatingError(state.error)
             }
         }
     }
 
-    abstract fun showProgress()
-    abstract fun hideProgress()
-    abstract fun hideKeyboard()
-
     protected fun ifConnectedToInternet(action: () -> Unit) {
         if (connectionChecker.checkInternet()) {
+            binding.root.hideKeyboard()
             action()
         }
     }

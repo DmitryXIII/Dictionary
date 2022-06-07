@@ -13,8 +13,6 @@ import com.ineedyourcode.dictionary.domain.entity.SearchingResult
 import com.ineedyourcode.dictionary.domain.usecase.WordSearchingUsecase
 import com.ineedyourcode.dictionary.ui.BaseFragment
 import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
-import com.ineedyourcode.dictionary.ui.uils.NoConnectionDialogFragment
-import com.ineedyourcode.dictionary.ui.uils.hideKeyboard
 import com.ineedyourcode.dictionary.ui.uils.showErrorSnack
 import javax.inject.Inject
 import javax.inject.Named
@@ -24,7 +22,7 @@ const val ANIMATION_ALPHA_VISIBLE = 1f
 const val ANIMATION_ALPHA_INVISIBLE = 0f
 
 class WordSearchingFragment :
-    BaseFragment<FragmentWordSearchingBinding>(FragmentWordSearchingBinding::inflate) {
+    BaseFragment<FragmentWordSearchingBinding, List<SearchingResult>>(FragmentWordSearchingBinding::inflate) {
 
     private val wordTranslateAdapter = WordSearchingFragmentRecyclerViewAdapter()
 
@@ -72,7 +70,6 @@ class WordSearchingFragment :
 
     private fun searchWord() {
         ifConnectedToInternet {
-            hideKeyboard()
             viewModel.searchWord(binding.wordTranslateEditText.text.toString())
         }
     }
@@ -99,10 +96,6 @@ class WordSearchingFragment :
     override fun hideProgress() {
         binding.wordTranslateRecyclerView.isVisible = true
         binding.translateWordProgressBar.isVisible = false
-    }
-
-    override fun hideKeyboard() {
-        binding.root.hideKeyboard()
     }
 
     override fun onDestroyView() {
