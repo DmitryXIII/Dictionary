@@ -6,40 +6,38 @@ import com.ineedyourcode.dictionary.data.datasource.remote.SearchingDtoMapper
 import com.ineedyourcode.dictionary.data.datasource.remote.SkyengApi
 import com.ineedyourcode.dictionary.data.repository.WordSearchingGateway
 import com.ineedyourcode.dictionary.domain.usecase.WordSearchingUsecase
-import dagger.Module
-import dagger.Provides
+import com.ineedyourcode.dictionary.ui.wordsearching.WordSearchingViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
-import javax.inject.Singleton
 
 private const val BASE_URL = "https://dictionary.skyeng.ru/api/public/v1/"
 private const val BUILD_CONFIG_TYPE_DEBUG = "debug"
-const val DATASOURCE_NAME = "DataSource"
-const val GATEWAY_NAME = "Gateway"
+const val NAME_GATEWAY = "Gateway"
+const val NAME_DATASOURCE = "Datasource"
 
-@Module
-class RepositoriesDependenciesModule {
-    @Singleton
-    @Provides
-    @Named(GATEWAY_NAME)
-    fun provideGateway(@Named(DATASOURCE_NAME) dataSource: WordSearchingUsecase): WordSearchingUsecase {
-        return WordSearchingGateway(dataSource)
+val appModule = module {
+    viewModel {
+        WordSearchingViewModel(gateway = get(named(NAME_GATEWAY)),
+            savedStateHandle = get())
     }
 
-    @Singleton
-    @Provides
-    @Named(DATASOURCE_NAME)
-    fun provideDataSource(retrofit: SkyengApi, mapper: SearchingDtoMapper): WordSearchingUsecase {
-        return RetrofitDataSource(retrofit, mapper)
+    single<WordSearchingUsecase>(named(NAME_GATEWAY)) {
+        WordSearchingGateway(dataSource = get(named(
+            NAME_DATASOURCE)))
     }
 
-    @Singleton
-    @Provides
-    fun provideRetrofit(): SkyengApi {
+    single<WordSearchingUsecase>(named(NAME_DATASOURCE)) {
+        RetrofitDataSource(retrofit = get(),
+            mapper = get())
+    }
+
+    single {
         val retrofit = Retrofit.Builder()
 
         if (BuildConfig.BUILD_TYPE == BUILD_CONFIG_TYPE_DEBUG) {
@@ -55,11 +53,8 @@ class RepositoriesDependenciesModule {
             addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         }
 
-        return retrofit.build().create(SkyengApi::class.java)
+        retrofit.build().create(SkyengApi::class.java)
     }
 
-    @Provides
-    fun provideDtoMapper(): SearchingDtoMapper {
-        return SearchingDtoMapper()
-    }
+    factory { SearchingDtoMapper() }
 }
