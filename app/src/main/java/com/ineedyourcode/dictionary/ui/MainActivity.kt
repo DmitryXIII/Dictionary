@@ -4,12 +4,18 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.ineedyourcode.dictionary.App
 import com.ineedyourcode.dictionary.R
 import com.ineedyourcode.dictionary.ui.uils.NoConnectionDialogFragment
 import com.ineedyourcode.dictionary.ui.wordsearching.WordSearchingFragment
+import kotlinx.coroutines.*
+import kotlin.random.Random
+import kotlin.random.nextLong
 
 class MainActivity : AppCompatActivity(), InternetConnectionChecker {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -23,8 +29,52 @@ class MainActivity : AppCompatActivity(), InternetConnectionChecker {
     }
 
     override fun onResume() {
+
+        val cancel = App.instance.job?.cancel()
+        var list = mutableListOf<String>()
+//        val job = CoroutineScope(Dispatchers.IO).async {
+//            Log.d("@@@@@", "ASYNC START")
+//            repeat(10) {
+//                val s = doIt()
+//                list.add("$s + $it")
+//                Log.d("@@@@@", "$s + $it")
+//            }
+//            Log.d("@@@@@", "================================================")
+//            list
+//        }
+
+        val job = CoroutineScope(Dispatchers.IO).async {
+            Log.d("@@@@@", "ASYNC START")
+            repeat(10) { async {
+                    val time = doIt()
+
+                    Log.d("@@@@@", "$it + $time")
+                    list.add("$it + $time")
+                }
+
+
+            }
+            Log.d("@@@@@", "================================================")
+            list
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            Log.d("@@@@@", "LAUNCH START")
+            job.await()
+            Log.d("@@@@@", "================================================")
+            for (s in list) {
+                Log.d("@@@@@", s.toString())
+            }
+        }
+
         checkInternet()
         super.onResume()
+    }
+
+    private suspend fun doIt(): Long {
+        val time = Random.nextLong(1000..5000L)
+        delay(time)
+        return time
     }
 
     override fun checkInternet(): Boolean {

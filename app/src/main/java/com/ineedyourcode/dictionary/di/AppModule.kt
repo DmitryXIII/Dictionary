@@ -13,7 +13,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 private const val BASE_URL = "https://dictionary.skyeng.ru/api/public/v1/"
@@ -50,7 +49,6 @@ val appModule = module {
         retrofit.apply {
             baseUrl(BASE_URL)
             addConverterFactory(GsonConverterFactory.create())
-            addCallAdapterFactory(RxJava3CallAdapterFactory.create())
         }
 
         retrofit.build().create(SkyengApi::class.java)
