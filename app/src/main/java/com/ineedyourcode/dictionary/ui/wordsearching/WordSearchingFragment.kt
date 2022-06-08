@@ -4,36 +4,51 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ineedyourcode.dictionary.R
+import com.ineedyourcode.dictionary.app
 import com.ineedyourcode.dictionary.databinding.FragmentWordSearchingBinding
+import com.ineedyourcode.dictionary.di.GATEWAY_NAME
 import com.ineedyourcode.dictionary.domain.entity.SearchingResult
+import com.ineedyourcode.dictionary.domain.usecase.WordSearchingUsecase
+import com.ineedyourcode.dictionary.ui.BaseFragment
 import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
-import com.ineedyourcode.dictionary.ui.uils.hideKeyboard
 import com.ineedyourcode.dictionary.ui.uils.showErrorSnack
+import javax.inject.Inject
+import javax.inject.Named
 
 const val ANIMATION_DURATION = 100L
 const val ANIMATION_ALPHA_VISIBLE = 1f
 const val ANIMATION_ALPHA_INVISIBLE = 0f
 
-class WordSearchingFragment : Fragment(R.layout.fragment_word_searching),
-    WordSearchingViewContract {
-
-    private var _binding: FragmentWordSearchingBinding? = null
-    private val binding: FragmentWordSearchingBinding
-        get() = _binding!!
+class WordSearchingFragment :
+    BaseFragment<FragmentWordSearchingBinding, List<SearchingResult>>(FragmentWordSearchingBinding::inflate) {
 
     private val wordTranslateAdapter = WordSearchingFragmentRecyclerViewAdapter()
 
-    private val presenter: WordSearchingFragmentPresenterContract =
-        WordSearchingFragmentPresenter()
+    @Inject
+    @Named(GATEWAY_NAME)
+    lateinit var gateway: WordSearchingUsecase
+
+    private val stateSavingViewModel: StateSavingViewModel by viewModels()
+
+    override val viewModel: WordSearchingViewModelContract.BaseViewModel
+            by viewModels<WordSearchingViewModel> {
+                WordSearchingViewModelFactory(gateway)
+            }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentWordSearchingBinding.bind(view)
 
-        presenter.onAttach(this)
+        stateSavingViewModel.data.observe(viewLifecycleOwner) {
+            binding.lottie.alpha = it
+        }
+
+        requireActivity().app.appDependenciesComponent.inject(this)
+
+        viewModel.getData().observe(viewLifecycleOwner) {
+            renderData(it)
+        }
 
         binding.wordTranslateRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -54,8 +69,9 @@ class WordSearchingFragment : Fragment(R.layout.fragment_word_searching),
     }
 
     private fun searchWord() {
-        hideKeyboard()
-        presenter.searchWord(binding.wordTranslateEditText.text.toString())
+        ifConnectedToInternet {
+            viewModel.searchWord(binding.wordTranslateEditText.text.toString())
+        }
     }
 
     override fun showTranslatingResult(result: List<SearchingResult>) {
@@ -67,16 +83,12 @@ class WordSearchingFragment : Fragment(R.layout.fragment_word_searching),
         wordTranslateAdapter.clearData()
         binding.wordTranslateRecyclerView.adapter = wordTranslateAdapter
         binding.wordTranslateRecyclerView.isVisible = false
-        binding.lottie.animate()
-            .alpha(ANIMATION_ALPHA_VISIBLE)
-            .duration = ANIMATION_DURATION
+        animateLottie(ANIMATION_ALPHA_VISIBLE)
         binding.root.showErrorSnack(error)
     }
 
     override fun showProgress() {
-        binding.lottie.animate()
-            .alpha(ANIMATION_ALPHA_INVISIBLE)
-            .duration = ANIMATION_DURATION
+        animateLottie(ANIMATION_ALPHA_INVISIBLE)
         binding.wordTranslateRecyclerView.isVisible = false
         binding.translateWordProgressBar.isVisible = true
     }
@@ -86,18 +98,17 @@ class WordSearchingFragment : Fragment(R.layout.fragment_word_searching),
         binding.translateWordProgressBar.isVisible = false
     }
 
-    override fun hideKeyboard() {
-        binding.root.hideKeyboard()
-    }
-
     override fun onDestroyView() {
         binding.wordTranslateRecyclerView.adapter = null
-        _binding = null
         super.onDestroyView()
     }
 
-    override fun onDestroy() {
-        presenter.onDetach()
-        super.onDestroy()
+    private fun animateLottie(alpha: Float) {
+        binding.lottie.animate()
+            .alpha(alpha)
+            .withEndAction {
+                stateSavingViewModel.saveLottieVisibilityState(binding.lottie.alpha)
+            }
+            .duration = ANIMATION_DURATION
     }
 }

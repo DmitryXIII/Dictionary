@@ -1,13 +1,17 @@
 package com.ineedyourcode.dictionary
 
 import android.app.Application
-import com.ineedyourcode.dictionary.ui.wordsearching.WordSearchingFragmentPresenter
-import com.ineedyourcode.dictionary.ui.wordsearching.WordSearchingFragmentPresenterContract
+import android.content.Context
+import com.ineedyourcode.dictionary.di.AppDependenciesComponent
+import com.ineedyourcode.dictionary.di.DaggerAppDependenciesComponent
 
 class App : Application() {
-    companion object {
-        val wordTranslatePresenter: WordSearchingFragmentPresenterContract by lazy {
-            WordSearchingFragmentPresenter()
-        }
+    val appDependenciesComponent: AppDependenciesComponent by lazy {
+        DaggerAppDependenciesComponent
+            .builder()
+            .build()
     }
 }
+
+val Context.app: App
+    get() = applicationContext as App
