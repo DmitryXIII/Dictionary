@@ -2,7 +2,7 @@ package com.ineedyourcode.dictionary.data.datasource.remote
 
 import com.ineedyourcode.dictionary.domain.entity.ResponseCodes
 import com.ineedyourcode.dictionary.domain.entity.SearchingResult
-import com.ineedyourcode.dictionary.domain.usecase.DomainCallback
+import com.ineedyourcode.dictionary.domain.usecase.WordSearchingCallback
 import com.ineedyourcode.dictionary.domain.usecase.WordSearchingUsecase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +13,7 @@ class RetrofitDataSource(
     private val mapper: SearchingDtoMapper,
 ) : WordSearchingUsecase {
 
-    override fun search(word: String, callback: DomainCallback<List<SearchingResult>>) {
+    override fun search(word: String, callback: WordSearchingCallback<List<SearchingResult>>) {
         CoroutineScope(Dispatchers.IO).launch {
             val result = retrofit.search(word)
             if (result.isSuccessful) {

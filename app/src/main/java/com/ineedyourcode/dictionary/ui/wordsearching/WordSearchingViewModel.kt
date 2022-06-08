@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.ineedyourcode.dictionary.domain.entity.ResponseCodes
 import com.ineedyourcode.dictionary.domain.entity.SearchingResult
-import com.ineedyourcode.dictionary.domain.usecase.DomainCallback
+import com.ineedyourcode.dictionary.domain.usecase.WordSearchingCallback
 import com.ineedyourcode.dictionary.domain.usecase.WordSearchingUsecase
 import com.ineedyourcode.dictionary.ui.AppState
 import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
@@ -25,7 +25,7 @@ class WordSearchingViewModel(
         if (word.isNotEmpty()) {
             liveData.postValue(AppState.Loading)
 
-            gateway.search(word, object : DomainCallback<List<SearchingResult>> {
+            gateway.search(word, object : WordSearchingCallback<List<SearchingResult>> {
                 override fun onSuccess(result: List<SearchingResult>) {
                     liveData.postValue(AppState.Success(result))
                 }
