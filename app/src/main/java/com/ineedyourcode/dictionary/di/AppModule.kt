@@ -7,6 +7,7 @@ import com.ineedyourcode.dictionary.data.datasource.remote.SkyengApi
 import com.ineedyourcode.dictionary.data.repository.WordSearchingGateway
 import com.ineedyourcode.dictionary.domain.usecase.WordSearchingUsecase
 import com.ineedyourcode.dictionary.ui.wordsearching.WordSearchingViewModel
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -49,6 +50,7 @@ val appModule = module {
         retrofit.apply {
             baseUrl(BASE_URL)
             addConverterFactory(GsonConverterFactory.create())
+            addCallAdapterFactory(CoroutineCallAdapterFactory())
         }
 
         retrofit.build().create(SkyengApi::class.java)

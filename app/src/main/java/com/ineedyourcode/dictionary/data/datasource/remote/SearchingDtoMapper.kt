@@ -4,11 +4,6 @@ import com.ineedyourcode.dictionary.data.datasource.remote.dto.SearchingResultDt
 import com.ineedyourcode.dictionary.domain.entity.SearchingResult
 
 class SearchingDtoMapper {
-    fun convertSearchingResultDtoListToEntityList(
-        result: List<SearchingResultDto>,
-    ): List<SearchingResult> {
-        return result.map {
-            SearchingResult(it.text, it.meanings.first().translation.text)
-        }
-    }
+    fun convertResultDtoListToEntity(result: SearchingResultDto): SearchingResult =
+        SearchingResult(result.text, result.meanings.first().translation.text)
 }
