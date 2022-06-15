@@ -10,6 +10,7 @@ import com.ineedyourcode.dictionary.ui.uils.NoConnectionDialogFragment
 import com.ineedyourcode.dictionary.ui.wordsearching.WordSearchingFragment
 
 class MainActivity : AppCompatActivity(), InternetConnectionChecker {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
