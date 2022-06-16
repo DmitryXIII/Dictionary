@@ -38,25 +38,6 @@ class WordSearchingViewModel(
                     ErrorMapper.DirectString(error.message.toString())))
             }
         }
-//            gateway.search(word, object : WordSearchingCallback<List<SearchingResult>> {
-//                override fun onSuccess(result: List<SearchingResult>) {
-//                    liveData.postValue(AppState.Success(result))
-//                }
-//
-//                override fun onError(error: Throwable) {
-//                    when (error.message) {
-//                        ResponseCodes.INVALID_REQUEST.code -> {
-//                            liveData.postValue(AppState.Error(
-//                                ErrorMapper.StringResource(ResponseCodes.INVALID_REQUEST)))
-//                        }
-//
-//                        else -> {
-//                            liveData.postValue(AppState.Error(
-//                                ErrorMapper.DirectString(error.message.toString())))
-//                        }
-//                    }
-//                }
-//            })
     }
 
     fun saveLottieVisibilityState(alpha: Float) {
