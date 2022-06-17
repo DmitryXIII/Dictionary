@@ -18,5 +18,9 @@ class WordSearchingGateway(
         localDataSource.addToSearchingHistory(word)
     }
 
+    override fun addToFavorite(word: String) {
+        localDataSource.addToFavorite(word)
+    }
+
     override suspend fun searchInDictionary(word: String) = remoteDataSource.searchInDictionary(word)
 }

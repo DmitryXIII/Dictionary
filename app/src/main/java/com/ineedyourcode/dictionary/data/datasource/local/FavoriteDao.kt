@@ -9,8 +9,8 @@ interface FavoriteDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addToFavorite(word: FavoriteWordsEntity)
 
-    @Query ("SELECT * FROM FavoriteWordsEntity")
-    fun getAllFavorite() : List<FavoriteWordsEntity>
+    @Query("SELECT * FROM FavoriteWordsEntity WHERE word = :word")
+    fun checkIsFavorite(word: String): FavoriteWordsEntity
 
     @Delete
     fun deleteFromFavorite(word: FavoriteWordsEntity)

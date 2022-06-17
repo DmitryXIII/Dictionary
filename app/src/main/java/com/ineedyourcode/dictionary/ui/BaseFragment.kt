@@ -42,8 +42,6 @@ abstract class BaseFragment<VB : ViewBinding, T>(
         } else {
             throw IllegalStateException(getString(R.string.no_is_main_controller))
         }
-
-
     }
 
     override fun onDestroy() {

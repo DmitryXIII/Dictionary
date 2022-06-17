@@ -8,5 +8,6 @@ data class SearchingHistoryEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val word: String,
+    val isFavorite: Boolean = false
 )
 

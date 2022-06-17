@@ -3,6 +3,7 @@ package com.ineedyourcode.dictionary.ui.searchinghistory
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ineedyourcode.dictionary.data.datasource.local.entities.SearchingHistoryEntity
 import com.ineedyourcode.dictionary.databinding.FragmentSearchingHistoryBinding
 import com.ineedyourcode.dictionary.ui.BaseFragment
@@ -15,8 +16,15 @@ class SearchingHistoryFragment :
         FragmentSearchingHistoryBinding::inflate) {
     override val viewModel: SearchingHistoryViewModel by viewModel()
 
+    private val historyAdapter = SearchingHistoryAdapter()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.historyRecyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = historyAdapter
+        }
 
         viewModel.getData().observe(viewLifecycleOwner) {
             renderData(it)
@@ -26,11 +34,10 @@ class SearchingHistoryFragment :
     }
 
     override fun showResult(result: List<SearchingHistoryEntity>) {
-
+        historyAdapter.setData(result)
     }
 
     override fun showError(error: ErrorMapper) {
-        binding.historyProgressBar.isVisible = false
         binding.root.showErrorSnack(error)
     }
 
