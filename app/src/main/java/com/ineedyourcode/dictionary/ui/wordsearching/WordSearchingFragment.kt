@@ -50,6 +50,10 @@ class WordSearchingFragment :
             }
             false
         }
+
+        binding.historyFab.setOnClickListener {
+            mainController.navigateToHistory()
+        }
     }
 
     private fun searchWord() {
@@ -58,12 +62,12 @@ class WordSearchingFragment :
         }
     }
 
-    override fun showTranslatingResult(result: List<SearchingResult>) {
+    override fun showResult(result: List<SearchingResult>) {
         wordTranslateAdapter.setData(result)
         binding.wordTranslateRecyclerView.adapter = wordTranslateAdapter
     }
 
-    override fun showTranslatingError(error: ErrorMapper) {
+    override fun showError(error: ErrorMapper) {
         wordTranslateAdapter.clearData()
         binding.wordTranslateRecyclerView.adapter = wordTranslateAdapter
         binding.wordTranslateRecyclerView.isVisible = false

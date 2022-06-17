@@ -5,11 +5,14 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.ineedyourcode.dictionary.R
+import com.ineedyourcode.dictionary.ui.searchinghistory.SearchingHistoryFragment
+import com.ineedyourcode.dictionary.ui.uils.ActivityContract
 import com.ineedyourcode.dictionary.ui.uils.NoConnectionDialogFragment
 import com.ineedyourcode.dictionary.ui.wordsearching.WordSearchingFragment
 
-class MainActivity : AppCompatActivity(), InternetConnectionChecker {
+class MainActivity : AppCompatActivity(), ActivityContract {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,5 +45,21 @@ class MainActivity : AppCompatActivity(), InternetConnectionChecker {
         }
 
         return isConnectionOk
+    }
+
+    override fun navigateToHistory() {
+        navigateTo(SearchingHistoryFragment())
+    }
+
+    override fun navigateToFavorite() {
+
+    }
+
+    private fun navigateTo(destination: Fragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.main_fragment_container, destination)
+            .addToBackStack("")
+            .commit()
     }
 }

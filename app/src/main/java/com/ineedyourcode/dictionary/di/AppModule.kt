@@ -7,41 +7,51 @@ import com.ineedyourcode.dictionary.data.datasource.remote.RetrofitDataSource
 import com.ineedyourcode.dictionary.data.datasource.remote.SearchingDtoMapper
 import com.ineedyourcode.dictionary.data.datasource.remote.SkyengApi
 import com.ineedyourcode.dictionary.data.repository.WordSearchingGateway
-import com.ineedyourcode.dictionary.domain.usecase.WordSearchingUsecase
+import com.ineedyourcode.dictionary.domain.usecase.GatewayUsecase
+import com.ineedyourcode.dictionary.domain.usecase.SearchingHistoryUsecase
+import com.ineedyourcode.dictionary.ui.searchinghistory.SearchingHistoryViewModel
 import com.ineedyourcode.dictionary.ui.wordsearching.WordSearchingViewModel
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 private const val BASE_URL = "https://dictionary.skyeng.ru/api/public/v1/"
 private const val BUILD_CONFIG_TYPE_DEBUG = "debug"
-const val NAME_GATEWAY = "Gateway"
-const val NAME_DATASOURCE = "Datasource"
 
-val appModule = module {
+val viewModelModule = module {
     viewModel {
-        WordSearchingViewModel(gateway = get(named(NAME_GATEWAY)),
+        WordSearchingViewModel(gateway = get(),
             savedStateHandle = get())
     }
 
-    single<WordSearchingUsecase>(named(NAME_GATEWAY)) {
-        WordSearchingGateway(remoteDataSource = get(named(
-            NAME_DATASOURCE)), localDataSource = get())
+    viewModel {
+        SearchingHistoryViewModel(gateway = get())
+    }
+}
+
+val datasourceModule = module {
+    single<GatewayUsecase> {
+        WordSearchingGateway(remoteDataSource = get(), localDataSource = get())
     }
 
-    single<WordSearchingUsecase>(named(NAME_DATASOURCE)) {
+    single<SearchingHistoryUsecase> {
+        WordSearchingGateway(remoteDataSource = get(), localDataSource = get())
+    }
+
+    single {
         RetrofitDataSource(retrofit = get(),
             mapper = get())
     }
 
     single { RoomDataSource(favoriteDao = get(), historyDao = get()) }
+}
 
+val retrofitModule = module {
     single {
         val retrofit = Retrofit.Builder()
 

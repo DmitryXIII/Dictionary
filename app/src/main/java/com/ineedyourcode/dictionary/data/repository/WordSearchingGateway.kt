@@ -1,11 +1,22 @@
 package com.ineedyourcode.dictionary.data.repository
 
 import com.ineedyourcode.dictionary.data.datasource.local.RoomDataSource
-import com.ineedyourcode.dictionary.domain.usecase.WordSearchingUsecase
+import com.ineedyourcode.dictionary.data.datasource.local.entities.SearchingHistoryEntity
+import com.ineedyourcode.dictionary.data.datasource.remote.RetrofitDataSource
+import com.ineedyourcode.dictionary.domain.usecase.GatewayUsecase
 
 class WordSearchingGateway(
-    val remoteDataSource: WordSearchingUsecase,
+    val remoteDataSource: RetrofitDataSource,
     val localDataSource: RoomDataSource,
-) : WordSearchingUsecase {
-    override suspend fun search(word: String) = remoteDataSource.search(word)
+) : GatewayUsecase {
+    @Suppress("UNCHECKED_CAST")
+    override fun <T> getSearchingHistory(): List<T> {
+        return localDataSource.getSearchingHistory<SearchingHistoryEntity>() as List<T>
+    }
+
+    override fun addToSearchingHistory(word: String) {
+        localDataSource.addToSearchingHistory(word)
+    }
+
+    override suspend fun searchInDictionary(word: String) = remoteDataSource.searchInDictionary(word)
 }

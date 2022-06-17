@@ -7,6 +7,6 @@ class RetrofitDataSource(
     private val mapper: SearchingDtoMapper,
 ) : WordSearchingUsecase {
 
-    override suspend fun search(word: String) =
+    override suspend fun searchInDictionary(word: String) =
         retrofit.searchAsync(word).await().map { mapper.convertResultDtoListToEntity(it) }
 }
