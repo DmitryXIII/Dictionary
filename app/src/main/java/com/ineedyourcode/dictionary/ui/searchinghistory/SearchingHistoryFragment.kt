@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ineedyourcode.dictionary.data.datasource.local.entities.SearchingHistoryEntity
+import com.ineedyourcode.dictionary.data.datasource.local.entities.HistoryEntity
 import com.ineedyourcode.dictionary.databinding.FragmentSearchingHistoryBinding
 import com.ineedyourcode.dictionary.ui.BaseFragment
 import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
@@ -12,7 +12,7 @@ import com.ineedyourcode.dictionary.ui.uils.showErrorSnack
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchingHistoryFragment :
-    BaseFragment<FragmentSearchingHistoryBinding, List<SearchingHistoryEntity>>(
+    BaseFragment<FragmentSearchingHistoryBinding, List<HistoryEntity>>(
         FragmentSearchingHistoryBinding::inflate) {
     override val viewModel: SearchingHistoryViewModel by viewModel()
 
@@ -36,7 +36,7 @@ class SearchingHistoryFragment :
         viewModel.getSearchingHistory()
     }
 
-    override fun showResult(result: List<SearchingHistoryEntity>) {
+    override fun showResult(result: List<HistoryEntity>) {
         historyAdapter.setData(result)
     }
 

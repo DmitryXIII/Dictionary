@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class WordMeaning(
-    val ID : Int,
+    val ID : String,
     val imageUrl: String,
     val transcription: String,
     val translation: String,

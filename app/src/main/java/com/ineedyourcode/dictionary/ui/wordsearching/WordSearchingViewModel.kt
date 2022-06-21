@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.ineedyourcode.dictionary.domain.entity.ResponseCodes
+import com.ineedyourcode.dictionary.domain.entity.SearchingResultItem
 import com.ineedyourcode.dictionary.domain.usecase.GatewayUsecase
 import com.ineedyourcode.dictionary.ui.AppState
 import com.ineedyourcode.dictionary.ui.ViewModelContract
@@ -37,6 +38,10 @@ class WordSearchingViewModel(
                     ErrorMapper.DirectString(error.message.toString())))
             }
         }
+    }
+
+    fun addToHistory(searchingResultItem: SearchingResultItem) {
+        gateway.addToHistory(searchingResultItem)
     }
 
     fun saveLottieVisibilityState(alpha: Float) {

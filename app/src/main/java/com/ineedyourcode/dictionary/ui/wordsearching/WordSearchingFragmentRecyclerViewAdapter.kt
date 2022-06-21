@@ -5,13 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ineedyourcode.dictionary.databinding.FragmentSearchResultItemBinding
-import com.ineedyourcode.dictionary.domain.entity.SearchingResult
+import com.ineedyourcode.dictionary.domain.entity.SearchingResultItem
 
-class WordSearchingFragmentRecyclerViewAdapter(private val clickListener : ((SearchingResult) -> Unit)) :
+class WordSearchingFragmentRecyclerViewAdapter(private val clickListener : ((SearchingResultItem) -> Unit)) :
     RecyclerView.Adapter<WordSearchingFragmentRecyclerViewAdapter.WordTranslatingViewHolder>() {
-    private var dataList = listOf<SearchingResult>()
+    private var dataList = listOf<SearchingResultItem>()
 
-    fun setData(resultList: List<SearchingResult>) {
+    fun setData(resultList: List<SearchingResultItem>) {
         dataList = listOf()
         notifyItemRangeRemoved(0, dataList.lastIndex)
         dataList = resultList
@@ -38,13 +38,13 @@ class WordSearchingFragmentRecyclerViewAdapter(private val clickListener : ((Sea
     override fun getItemCount() = dataList.size
 
     inner  class WordTranslatingViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(searchingResult: SearchingResult) {
+        fun bind(searchingResultItem: SearchingResultItem) {
             FragmentSearchResultItemBinding.bind(itemView).apply {
-                translationTextView.text = searchingResult.wordTranslation
+                translationTextView.text = searchingResultItem.wordTranslation
             }
 
             itemView.setOnClickListener {
-                clickListener.invoke(searchingResult)
+                clickListener.invoke(searchingResultItem)
             }
         }
     }

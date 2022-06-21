@@ -2,9 +2,9 @@ package com.ineedyourcode.dictionary.data.datasource.remote.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class SearchingResultDto(
+data class SearchingResultItemDto(
     @SerializedName("id")
-    val ID : Int,
+    val ID : String,
     @SerializedName("meanings")
     val meanings: List<MeaningDto>,
     @SerializedName("text")

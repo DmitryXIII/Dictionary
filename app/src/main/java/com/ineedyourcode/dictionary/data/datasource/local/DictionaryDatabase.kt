@@ -4,15 +4,17 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.ineedyourcode.dictionary.data.datasource.local.entities.FavoriteWordsEntity
-import com.ineedyourcode.dictionary.data.datasource.local.entities.SearchingHistoryEntity
+import com.ineedyourcode.dictionary.data.datasource.local.dao.HistoryDao
+import com.ineedyourcode.dictionary.data.datasource.local.dao.WordMeaningDao
+import com.ineedyourcode.dictionary.data.datasource.local.entities.HistoryEntity
+import com.ineedyourcode.dictionary.data.datasource.local.entities.WordMeaningEntity
 
-@Database(entities = [FavoriteWordsEntity::class, SearchingHistoryEntity::class],
+@Database(entities = [WordMeaningEntity::class, HistoryEntity::class],
     version = 1,
     exportSchema = true)
 abstract class DictionaryDatabase: RoomDatabase() {
     abstract val historyDao: HistoryDao
-    abstract val favoriteDao: FavoriteDao
+    abstract val wordMeaningDao: WordMeaningDao
 
     companion object {
         private var INSTANCE: DictionaryDatabase? = null

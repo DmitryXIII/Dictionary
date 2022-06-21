@@ -2,14 +2,16 @@ package com.ineedyourcode.dictionary.di
 
 import com.ineedyourcode.dictionary.BuildConfig
 import com.ineedyourcode.dictionary.data.datasource.local.DictionaryDatabase
+import com.ineedyourcode.dictionary.data.datasource.local.EntitiesMapper
 import com.ineedyourcode.dictionary.data.datasource.local.RoomDataSource
 import com.ineedyourcode.dictionary.data.datasource.remote.RetrofitDataSource
 import com.ineedyourcode.dictionary.data.datasource.remote.SearchingDtoMapper
 import com.ineedyourcode.dictionary.data.datasource.remote.SkyengApi
-import com.ineedyourcode.dictionary.data.repository.WordSearchingGateway
+import com.ineedyourcode.dictionary.data.repository.WordGateway
 import com.ineedyourcode.dictionary.domain.usecase.GatewayUsecase
-import com.ineedyourcode.dictionary.domain.usecase.SearchingHistoryUsecase
+import com.ineedyourcode.dictionary.domain.usecase.HistoryUsecase
 import com.ineedyourcode.dictionary.ui.searchinghistory.SearchingHistoryViewModel
+import com.ineedyourcode.dictionary.ui.worddetails.WordDetailsViewModel
 import com.ineedyourcode.dictionary.ui.wordsearching.WordSearchingViewModel
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
@@ -32,15 +34,19 @@ val viewModelModule = module {
     viewModel {
         SearchingHistoryViewModel(gateway = get())
     }
+
+    viewModel {
+        WordDetailsViewModel(gateway = get())
+    }
 }
 
 val datasourceModule = module {
     single<GatewayUsecase> {
-        WordSearchingGateway(remoteDataSource = get(), localDataSource = get())
+        WordGateway(remoteDataSource = get(), localDataSource = get())
     }
 
-    single<SearchingHistoryUsecase> {
-        WordSearchingGateway(remoteDataSource = get(), localDataSource = get())
+    single<HistoryUsecase> {
+        WordGateway(remoteDataSource = get(), localDataSource = get())
     }
 
     single {
@@ -48,7 +54,7 @@ val datasourceModule = module {
             mapper = get())
     }
 
-    single { RoomDataSource(favoriteDao = get(), historyDao = get()) }
+    single { RoomDataSource(wordMeaningDao = get(), historyDao = get(), entityMapper = get()) }
 }
 
 val retrofitModule = module {
@@ -77,6 +83,8 @@ val retrofitModule = module {
 val roomModule = module {
     single { DictionaryDatabase.getUserDatabase(androidContext()) }
 
-    single { get<DictionaryDatabase>().favoriteDao }
+    single { get<DictionaryDatabase>().wordMeaningDao }
     single { get<DictionaryDatabase>().historyDao }
+
+    factory { EntitiesMapper() }
 }

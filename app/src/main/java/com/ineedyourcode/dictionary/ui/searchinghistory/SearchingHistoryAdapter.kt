@@ -4,14 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ineedyourcode.dictionary.data.datasource.local.entities.SearchingHistoryEntity
+import com.ineedyourcode.dictionary.data.datasource.local.entities.HistoryEntity
 import com.ineedyourcode.dictionary.databinding.FragmentSearchingHistoryItemBinding
 
-class SearchingHistoryAdapter(private val listener: (SearchingHistoryEntity) -> Unit) :
+class SearchingHistoryAdapter(private val listener: (HistoryEntity) -> Unit) :
     RecyclerView.Adapter<SearchingHistoryAdapter.SearchingHistoryViewHolder>() {
-    private var dataList = listOf<SearchingHistoryEntity>()
+    private var dataList = listOf<HistoryEntity>()
 
-    fun setData(list: List<SearchingHistoryEntity>) {
+    fun setData(list: List<HistoryEntity>) {
         dataList = list
         notifyItemRangeInserted(0, dataList.lastIndex)
     }
@@ -30,9 +30,9 @@ class SearchingHistoryAdapter(private val listener: (SearchingHistoryEntity) -> 
     override fun getItemCount() = dataList.size
 
     inner class SearchingHistoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(historyEntity: SearchingHistoryEntity) {
+        fun bind(historyEntity: HistoryEntity) {
             FragmentSearchingHistoryItemBinding.bind(itemView).apply {
-                historyItemTitleTextView.text = historyEntity.translation
+                historyItemTitleTextView.text = historyEntity.word
                 historyFavoriteIconImageView.setImageResource(when (historyEntity.isFavorite) {
                     true -> android.R.drawable.star_big_on
                     false -> android.R.drawable.star_big_off
