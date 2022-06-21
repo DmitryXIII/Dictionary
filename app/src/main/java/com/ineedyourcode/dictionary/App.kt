@@ -4,8 +4,8 @@ import android.app.Application
 import android.content.Context
 import com.ineedyourcode.dictionary.di.datasourceModule
 import com.ineedyourcode.dictionary.di.retrofitModule
-import com.ineedyourcode.dictionary.di.viewModelModule
 import com.ineedyourcode.dictionary.di.roomModule
+import com.ineedyourcode.dictionary.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 

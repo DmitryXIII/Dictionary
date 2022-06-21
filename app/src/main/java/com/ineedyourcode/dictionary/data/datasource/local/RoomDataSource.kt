@@ -17,4 +17,8 @@ class RoomDataSource(private val favoriteDao: FavoriteDao, private val historyDa
     override fun addToFavorite(word: String) {
         historyDao.addToFavorite(word)
     }
+
+    override fun deleteFromFavorite(word: String) {
+        historyDao.deleteFromFavorite(word)
+    }
 }

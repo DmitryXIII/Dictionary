@@ -1,9 +1,10 @@
 package com.ineedyourcode.dictionary.ui.uils
 
-import androidx.fragment.app.Fragment
+import com.ineedyourcode.dictionary.data.datasource.local.entities.SearchingHistoryEntity
 
 interface ActivityContract {
-    fun checkInternet() : Boolean
+    fun checkInternet(): Boolean
     fun navigateToHistory()
     fun navigateToFavorite()
+    fun openWordDetails(searchingHistoryEntity: SearchingHistoryEntity)
 }

@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ineedyourcode.dictionary.data.datasource.local.entities.SearchingHistoryEntity
 import com.ineedyourcode.dictionary.databinding.FragmentSearchingHistoryItemBinding
 
-class SearchingHistoryAdapter : RecyclerView.Adapter<SearchingHistoryViewHolder>() {
+class SearchingHistoryAdapter(private val listener: (SearchingHistoryEntity) -> Unit) :
+    RecyclerView.Adapter<SearchingHistoryAdapter.SearchingHistoryViewHolder>() {
     private var dataList = listOf<SearchingHistoryEntity>()
 
     fun setData(list: List<SearchingHistoryEntity>) {
@@ -27,16 +28,32 @@ class SearchingHistoryAdapter : RecyclerView.Adapter<SearchingHistoryViewHolder>
     }
 
     override fun getItemCount() = dataList.size
-}
 
-class SearchingHistoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    fun bind(historyEntity: SearchingHistoryEntity) {
-        FragmentSearchingHistoryItemBinding.bind(itemView).apply {
-            historyItemTitleTextView.text = historyEntity.word
-            historyFavoriteIconImageView.setImageResource(when (historyEntity.isFavorite) {
-                true -> android.R.drawable.star_big_on
-                false -> android.R.drawable.star_big_off
-            })
+    inner class SearchingHistoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        fun bind(historyEntity: SearchingHistoryEntity) {
+            FragmentSearchingHistoryItemBinding.bind(itemView).apply {
+                historyItemTitleTextView.text = historyEntity.word
+                historyFavoriteIconImageView.setImageResource(when (historyEntity.isFavorite) {
+                    true -> android.R.drawable.star_big_on
+                    false -> android.R.drawable.star_big_off
+                })
+                var isFavorite = historyEntity.isFavorite
+
+                historyFavoriteIconImageView.setOnClickListener {
+                    listener.invoke(historyEntity)
+
+                    historyFavoriteIconImageView.setImageResource(when (isFavorite) {
+                        true -> {
+                            android.R.drawable.star_big_off
+                        }
+                        false -> {
+                            android.R.drawable.star_big_on
+                        }
+                    })
+                    isFavorite = !isFavorite
+//                    notifyItemChanged(adapterPosition)
+                }
+            }
         }
     }
 }

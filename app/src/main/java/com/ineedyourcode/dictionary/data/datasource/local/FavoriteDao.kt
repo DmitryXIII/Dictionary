@@ -1,7 +1,6 @@
 package com.ineedyourcode.dictionary.data.datasource.local
 
 import androidx.room.*
-import com.google.android.material.circularreveal.CircularRevealHelper
 import com.ineedyourcode.dictionary.data.datasource.local.entities.FavoriteWordsEntity
 
 @Dao

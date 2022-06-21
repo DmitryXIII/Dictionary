@@ -18,4 +18,12 @@ class SearchingHistoryViewModel(private val gateway: SearchingHistoryUsecase) :
             _liveData.postValue(AppState.Error(ErrorMapper.DirectString(error.message.toString())))
         }
     }
+
+    fun addToFavorite(searchingHistoryEntity: SearchingHistoryEntity) {
+        if (!searchingHistoryEntity.isFavorite) {
+            gateway.addToFavorite(searchingHistoryEntity.word)
+        } else {
+            gateway.deleteFromFavorite(searchingHistoryEntity.word)
+        }
+    }
 }

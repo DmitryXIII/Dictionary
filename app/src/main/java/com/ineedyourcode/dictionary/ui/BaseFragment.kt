@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.ineedyourcode.dictionary.R
-import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
 import com.ineedyourcode.dictionary.ui.uils.ActivityContract
+import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
 import com.ineedyourcode.dictionary.ui.uils.hideKeyboard
 
 abstract class BaseFragment<VB : ViewBinding, T>(

@@ -1,7 +1,6 @@
 package com.ineedyourcode.dictionary.ui.wordsearching
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.ineedyourcode.dictionary.domain.entity.ResponseCodes

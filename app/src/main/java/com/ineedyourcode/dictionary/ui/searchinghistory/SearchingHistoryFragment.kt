@@ -16,7 +16,10 @@ class SearchingHistoryFragment :
         FragmentSearchingHistoryBinding::inflate) {
     override val viewModel: SearchingHistoryViewModel by viewModel()
 
-    private val historyAdapter = SearchingHistoryAdapter()
+    private val historyAdapter =
+        SearchingHistoryAdapter { searchingHistoryEntity ->
+            mainController.openWordDetails(searchingHistoryEntity)
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

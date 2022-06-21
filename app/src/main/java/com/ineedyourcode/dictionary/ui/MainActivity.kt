@@ -7,9 +7,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.ineedyourcode.dictionary.R
+import com.ineedyourcode.dictionary.data.datasource.local.entities.SearchingHistoryEntity
 import com.ineedyourcode.dictionary.ui.searchinghistory.SearchingHistoryFragment
 import com.ineedyourcode.dictionary.ui.uils.ActivityContract
 import com.ineedyourcode.dictionary.ui.uils.NoConnectionDialogFragment
+import com.ineedyourcode.dictionary.ui.worddetails.WordDetailsFragment
 import com.ineedyourcode.dictionary.ui.wordsearching.WordSearchingFragment
 
 class MainActivity : AppCompatActivity(), ActivityContract {
@@ -53,6 +55,10 @@ class MainActivity : AppCompatActivity(), ActivityContract {
 
     override fun navigateToFavorite() {
 
+    }
+
+    override fun openWordDetails(searchingHistoryEntity: SearchingHistoryEntity) {
+        navigateTo(WordDetailsFragment.newInstance(searchingHistoryEntity))
     }
 
     private fun navigateTo(destination: Fragment) {

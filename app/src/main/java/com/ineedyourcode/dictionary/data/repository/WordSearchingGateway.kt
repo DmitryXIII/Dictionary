@@ -22,5 +22,10 @@ class WordSearchingGateway(
         localDataSource.addToFavorite(word)
     }
 
+    override fun deleteFromFavorite (word: String) {
+        localDataSource.deleteFromFavorite(word)
+    }
+
+
     override suspend fun searchInDictionary(word: String) = remoteDataSource.searchInDictionary(word)
 }
