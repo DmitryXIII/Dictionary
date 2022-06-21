@@ -21,9 +21,9 @@ class SearchingHistoryViewModel(private val gateway: SearchingHistoryUsecase) :
 
     fun addToFavorite(searchingHistoryEntity: SearchingHistoryEntity) {
         if (!searchingHistoryEntity.isFavorite) {
-            gateway.addToFavorite(searchingHistoryEntity.word)
+            gateway.addToFavorite(searchingHistoryEntity.translation)
         } else {
-            gateway.deleteFromFavorite(searchingHistoryEntity.word)
+            gateway.deleteFromFavorite(searchingHistoryEntity.translation)
         }
     }
 }

@@ -31,7 +31,6 @@ class WordSearchingViewModel(
                         ErrorMapper.StringResource(ResponseCodes.INVALID_REQUEST)))
                 } else {
                     _liveData.postValue(AppState.Success(result))
-                    gateway.addToSearchingHistory(word)
                 }
             } catch (error: Throwable) {
                 _liveData.postValue(AppState.Error(

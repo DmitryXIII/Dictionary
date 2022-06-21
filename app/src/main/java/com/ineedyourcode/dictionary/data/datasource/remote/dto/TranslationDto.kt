@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class TranslationDto(
     @SerializedName("note")
-    val note: Any?,
+    val note: String?,
     @SerializedName("text")
     val text: String
 )

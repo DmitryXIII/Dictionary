@@ -8,4 +8,8 @@
     <string name="ok">OK</string>
     <string name="no_is_main_controller">Активити должна имплементировать ActivityContract</string>
     <string name="history_fab">history_fab</string>
+    <string name="translation_title">Перевод:</string>
+    <string name="transcription_title">Транскрипция:</string>
+    <string name="example_note_title">Пример:</string>
+    <string name="empty_string">---</string>
 </resources>

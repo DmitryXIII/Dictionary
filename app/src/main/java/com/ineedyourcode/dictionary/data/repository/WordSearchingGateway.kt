@@ -14,9 +14,12 @@ class WordSearchingGateway(
         return localDataSource.getSearchingHistory<SearchingHistoryEntity>() as List<T>
     }
 
-    override fun addToSearchingHistory(word: String) {
-        localDataSource.addToSearchingHistory(word)
+    override fun addToSearchingHistory(word: SearchingHistoryEntity) {
     }
+
+//    override fun addToSearchingHistory(word: String) {
+//        localDataSource.addToSearchingHistory(word)
+//    }
 
     override fun addToFavorite(word: String) {
         localDataSource.addToFavorite(word)

@@ -18,7 +18,7 @@ class SearchingHistoryFragment :
 
     private val historyAdapter =
         SearchingHistoryAdapter { searchingHistoryEntity ->
-            mainController.openWordDetails(searchingHistoryEntity)
+
         }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

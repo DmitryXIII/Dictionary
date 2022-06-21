@@ -17,11 +17,16 @@ private const val ANIMATION_ALPHA_VISIBLE = 1f
 private const val ANIMATION_ALPHA_INVISIBLE = 0f
 
 class WordSearchingFragment :
-    BaseFragment<FragmentWordSearchingBinding, List<SearchingResult>>(FragmentWordSearchingBinding::inflate) {
-
-    private val wordTranslateAdapter = WordSearchingFragmentRecyclerViewAdapter()
+    BaseFragment<FragmentWordSearchingBinding,List<SearchingResult>>(FragmentWordSearchingBinding::inflate) {
 
     override val viewModel: WordSearchingViewModel by stateViewModel()
+
+    private val wordTranslateAdapter = WordSearchingFragmentRecyclerViewAdapter {
+//        viewModel.addWordToHistory(it)
+        mainController.openWordDetails(it)
+    }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

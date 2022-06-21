@@ -13,9 +13,9 @@ interface HistoryDao {
     @Insert
     fun addToHistory(historyEntity: SearchingHistoryEntity)
 
-    @Query("UPDATE SearchingHistoryEntity SET isFavorite = 1 WHERE word = :word")
+    @Query("UPDATE SearchingHistoryEntity SET isFavorite = 1 WHERE translation = :word")
     fun addToFavorite(word: String)
 
-    @Query("UPDATE SearchingHistoryEntity SET isFavorite = 0 WHERE word = :word")
+    @Query("UPDATE SearchingHistoryEntity SET isFavorite = 0 WHERE translation = :word")
     fun deleteFromFavorite(word: String)
 }

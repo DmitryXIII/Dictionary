@@ -2,8 +2,6 @@ package com.ineedyourcode.dictionary.data.datasource.remote.dto
 
 import com.google.gson.annotations.SerializedName
 
-
-
 data class MeaningDto(
     @SerializedName("id")
     val ID : Int,

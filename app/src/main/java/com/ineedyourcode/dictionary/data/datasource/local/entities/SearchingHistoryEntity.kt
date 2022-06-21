@@ -10,7 +10,12 @@ import kotlinx.parcelize.Parcelize
 data class SearchingHistoryEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val word: String,
-    val isFavorite: Boolean = false
+    val imageUrl: String,
+    val partOfSpeechCode: String,
+    val previewUrl: String,
+    val soundUrl: String,
+    val transcription: String,
+    val translation: String,
+    var isFavorite: Boolean = false,
 ) : Parcelable
 

@@ -32,7 +32,7 @@ class SearchingHistoryAdapter(private val listener: (SearchingHistoryEntity) -> 
     inner class SearchingHistoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(historyEntity: SearchingHistoryEntity) {
             FragmentSearchingHistoryItemBinding.bind(itemView).apply {
-                historyItemTitleTextView.text = historyEntity.word
+                historyItemTitleTextView.text = historyEntity.translation
                 historyFavoriteIconImageView.setImageResource(when (historyEntity.isFavorite) {
                     true -> android.R.drawable.star_big_on
                     false -> android.R.drawable.star_big_off

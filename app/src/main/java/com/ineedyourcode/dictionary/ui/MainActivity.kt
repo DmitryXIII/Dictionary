@@ -7,7 +7,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.ineedyourcode.dictionary.R
-import com.ineedyourcode.dictionary.data.datasource.local.entities.SearchingHistoryEntity
+import com.ineedyourcode.dictionary.domain.entity.SearchingResult
 import com.ineedyourcode.dictionary.ui.searchinghistory.SearchingHistoryFragment
 import com.ineedyourcode.dictionary.ui.uils.ActivityContract
 import com.ineedyourcode.dictionary.ui.uils.NoConnectionDialogFragment
@@ -57,8 +57,8 @@ class MainActivity : AppCompatActivity(), ActivityContract {
 
     }
 
-    override fun openWordDetails(searchingHistoryEntity: SearchingHistoryEntity) {
-        navigateTo(WordDetailsFragment.newInstance(searchingHistoryEntity))
+    override fun openWordDetails(searchingResult: SearchingResult) {
+        navigateTo(WordDetailsFragment.newInstance(searchingResult))
     }
 
     private fun navigateTo(destination: Fragment) {

@@ -10,8 +10,8 @@ class RoomDataSource(private val favoriteDao: FavoriteDao, private val historyDa
         return historyDao.getSearchingHistory() as List<T>
     }
 
-    override fun addToSearchingHistory(word: String) {
-        historyDao.addToHistory(SearchingHistoryEntity(word = word))
+    override fun addToSearchingHistory(searchingHistoryEntity: SearchingHistoryEntity) {
+        historyDao.addToHistory(searchingHistoryEntity)
     }
 
     override fun addToFavorite(word: String) {

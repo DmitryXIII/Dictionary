@@ -8,5 +8,5 @@ class RetrofitDataSource(
 ) : WordSearchingUsecase {
 
     override suspend fun searchInDictionary(word: String) =
-        retrofit.searchAsync(word).await().map { mapper.convertResultDtoListToEntity(it) }
+        retrofit.searchAsync(word).await().map { mapper.convertResultDtoToEntity(it) }
 }
