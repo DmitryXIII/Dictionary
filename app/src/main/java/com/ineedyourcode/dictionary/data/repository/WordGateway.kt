@@ -24,16 +24,16 @@ class WordGateway(
         localDataSource.updateFavorite(historyItem)
     }
 
-    override fun deleteFromFavorite(word: String) {
-        localDataSource.deleteFromFavorite(word)
-    }
-
     override fun addToHistory(searchingResultItem: SearchingResultItem) {
         localDataSource.addToHistory(searchingResultItem)
     }
 
     override fun getWordMeanings(wordId: String): List<WordMeaning> {
         return localDataSource.getWordMeanings(wordId)
+    }
+
+    override fun getHistoryItem(word: String): HistoryItem {
+       return localDataSource.getHistoryItem(word)
     }
 
     override suspend fun searchInDictionary(word: String) =

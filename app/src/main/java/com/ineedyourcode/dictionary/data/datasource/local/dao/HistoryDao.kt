@@ -9,14 +9,14 @@ interface HistoryDao {
     @Query("SELECT * FROM HistoryEntity WHERE word LIKE '%' || :query || '%' ")
     fun getHistory(query: String): Flow<List<HistoryEntity>>
 
+    @Query("SELECT * FROM HistoryEntity WHERE word LIKE :word ")
+    fun getHistoryItem(word: String): HistoryEntity
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addToHistory(historyEntity: HistoryEntity)
 
     @Update
     fun updateFavorite(historyEntity: HistoryEntity)
-
-    @Query("UPDATE HistoryEntity SET isFavorite = 0 WHERE word = :word")
-    fun deleteFromFavorite(word: String)
 
     @Query("DELETE FROM HistoryEntity")
     fun clearHistory()

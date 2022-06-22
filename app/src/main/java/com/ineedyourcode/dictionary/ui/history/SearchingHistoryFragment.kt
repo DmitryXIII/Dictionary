@@ -2,7 +2,6 @@ package com.ineedyourcode.dictionary.ui.history
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -12,6 +11,7 @@ import com.ineedyourcode.dictionary.databinding.FragmentSearchingHistoryBinding
 import com.ineedyourcode.dictionary.domain.entity.HistoryItem
 import com.ineedyourcode.dictionary.ui.BaseFragment
 import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
+import com.ineedyourcode.dictionary.ui.uils.setOnTypeTextListener
 import com.ineedyourcode.dictionary.ui.uils.showErrorSnack
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
@@ -47,21 +47,7 @@ class SearchingHistoryFragment :
             adapter = historyAdapter
         }
 
-        binding.historySearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let {
-                    queryFlow.value = query
-                }
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                newText?.let {
-                    queryFlow.value = newText
-                }
-                return true
-            }
-        })
+        binding.historySearchView.setOnTypeTextListener(queryFlow)
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {

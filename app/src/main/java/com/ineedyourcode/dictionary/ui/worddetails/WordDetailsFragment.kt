@@ -6,9 +6,11 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ineedyourcode.dictionary.databinding.FragmentWordDetailsBinding
+import com.ineedyourcode.dictionary.domain.entity.HistoryItem
 import com.ineedyourcode.dictionary.domain.entity.WordMeaning
 import com.ineedyourcode.dictionary.ui.BaseFragment
 import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
+import com.ineedyourcode.dictionary.ui.uils.setFavoriteIcon
 import com.ineedyourcode.dictionary.ui.uils.showErrorSnack
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -18,6 +20,7 @@ class WordDetailsFragment :
     BaseFragment<FragmentWordDetailsBinding, List<WordMeaning>>(FragmentWordDetailsBinding::inflate) {
 
     private var currentWord: String? = null
+    private var currentHistoryItem: HistoryItem? = null
     private val detailsAdapter = WordDetailsAdapter()
 
     override val viewModel: WordDetailsViewModel by viewModel()
@@ -41,15 +44,29 @@ class WordDetailsFragment :
             adapter = detailsAdapter
         }
 
-        currentWord?.let {
+        currentWord?.let { it ->
+            viewModel.getHistoryItem(it).observe(viewLifecycleOwner) {
+                currentHistoryItem = it
+                binding.detailsFavoriteImageView.setFavoriteIcon(it)
+            }
+
             viewModel.getWordMeanings(it).observe(viewLifecycleOwner) { state ->
                 renderData(state)
             }
         }
 
         binding.detailsWordTitleTextView.text = currentWord
-    }
 
+        binding.detailsFavoriteImageView.apply {
+            setOnClickListener {
+                currentHistoryItem?.let { historyItem ->
+                    historyItem.isFavorite = !historyItem.isFavorite
+                    viewModel.updateFavorite(historyItem)
+                    binding.detailsFavoriteImageView.setFavoriteIcon(historyItem)
+                }
+            }
+        }
+    }
 
     override fun showResult(result: List<WordMeaning>) {
         detailsAdapter.setData(result)

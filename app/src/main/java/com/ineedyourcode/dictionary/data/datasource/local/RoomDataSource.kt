@@ -33,12 +33,12 @@ class RoomDataSource(
         historyDao.updateFavorite(entityMapper.convertHistoryItemToHistoryEntity(historyItem))
     }
 
-    override fun deleteFromFavorite(word: String) {
-        historyDao.deleteFromFavorite(word)
-    }
-
     override fun getWordMeanings(wordId: String): List<WordMeaning> {
         return entityMapper.convertWordMeaningsEntityListToWordMeaningsList(wordMeaningDao.getMeaningByOwnerId(
             wordId))
+    }
+
+    override fun getHistoryItem(word: String): HistoryItem {
+        return entityMapper.convertHistoryEntityToHistoryItem(historyDao.getHistoryItem(word))
     }
 }

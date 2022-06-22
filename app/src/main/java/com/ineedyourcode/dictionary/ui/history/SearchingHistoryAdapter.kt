@@ -4,11 +4,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ineedyourcode.dictionary.data.datasource.local.entities.HistoryEntity
 import com.ineedyourcode.dictionary.databinding.FragmentSearchingHistoryItemBinding
 import com.ineedyourcode.dictionary.domain.entity.HistoryItem
+import com.ineedyourcode.dictionary.ui.uils.setFavoriteIcon
 
-class SearchingHistoryAdapter(private val onItemClickListener: (HistoryItem) -> Unit, private val onFavoriteIconClickListener: (HistoryItem) -> Unit) :
+class SearchingHistoryAdapter(
+    private val onItemClickListener: (HistoryItem) -> Unit,
+    private val onFavoriteIconClickListener: (HistoryItem) -> Unit,
+) :
     RecyclerView.Adapter<SearchingHistoryAdapter.SearchingHistoryViewHolder>() {
     private var dataList = listOf<HistoryItem>()
 
@@ -34,10 +37,7 @@ class SearchingHistoryAdapter(private val onItemClickListener: (HistoryItem) -> 
         fun bind(historyItem: HistoryItem) {
             FragmentSearchingHistoryItemBinding.bind(itemView).apply {
                 historyItemTitleTextView.text = historyItem.word
-                historyFavoriteIconImageView.setImageResource(when (historyItem.isFavorite) {
-                    true -> android.R.drawable.star_on
-                    false -> android.R.drawable.star_off
-                })
+                historyFavoriteIconImageView.setFavoriteIcon(historyItem)
 
                 historyFavoriteIconImageView.setOnClickListener {
                     onFavoriteIconClickListener.invoke(historyItem)

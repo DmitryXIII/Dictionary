@@ -74,4 +74,16 @@ class EntitiesMapper {
             )
         }
     }
+
+    fun convertHistoryEntityToHistoryItem(
+        historyEntity: HistoryEntity,
+    ): HistoryItem {
+        return with(historyEntity) {
+            HistoryItem(
+                ID = id,
+                word = word,
+                isFavorite = isFavorite
+            )
+        }
+    }
 }
