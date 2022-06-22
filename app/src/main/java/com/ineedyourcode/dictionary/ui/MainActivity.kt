@@ -7,8 +7,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.ineedyourcode.dictionary.R
+import com.ineedyourcode.dictionary.domain.entity.HistoryItem
 import com.ineedyourcode.dictionary.domain.entity.SearchingResultItem
-import com.ineedyourcode.dictionary.ui.searchinghistory.SearchingHistoryFragment
+import com.ineedyourcode.dictionary.ui.history.SearchingHistoryFragment
 import com.ineedyourcode.dictionary.ui.uils.ActivityContract
 import com.ineedyourcode.dictionary.ui.uils.NoConnectionDialogFragment
 import com.ineedyourcode.dictionary.ui.worddetails.WordDetailsFragment
@@ -49,7 +50,7 @@ class MainActivity : AppCompatActivity(), ActivityContract {
         return isConnectionOk
     }
 
-    override fun navigateToHistory() {
+    override fun openHistory() {
         navigateTo(SearchingHistoryFragment())
     }
 
@@ -57,8 +58,12 @@ class MainActivity : AppCompatActivity(), ActivityContract {
 
     }
 
-    override fun openWordDetails(searchingResultItem: SearchingResultItem) {
+    override fun openWordDetailsWithSavingToHistory(searchingResultItem: SearchingResultItem) {
         navigateTo(WordDetailsFragment.newInstance(searchingResultItem.wordTranslation))
+    }
+
+    override fun openWordDetailsFromHistory(historyItem: HistoryItem) {
+        navigateTo(WordDetailsFragment.newInstance(historyItem.word))
     }
 
     private fun navigateTo(destination: Fragment) {

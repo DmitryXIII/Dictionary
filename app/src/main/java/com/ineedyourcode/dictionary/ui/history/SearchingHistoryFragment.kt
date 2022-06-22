@@ -1,15 +1,25 @@
-package com.ineedyourcode.dictionary.ui.searchinghistory
+package com.ineedyourcode.dictionary.ui.history
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ineedyourcode.dictionary.data.datasource.local.entities.HistoryEntity
 import com.ineedyourcode.dictionary.databinding.FragmentSearchingHistoryBinding
 import com.ineedyourcode.dictionary.domain.entity.HistoryItem
 import com.ineedyourcode.dictionary.ui.BaseFragment
 import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
 import com.ineedyourcode.dictionary.ui.uils.showErrorSnack
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchingHistoryFragment :
@@ -17,9 +27,11 @@ class SearchingHistoryFragment :
         FragmentSearchingHistoryBinding::inflate) {
     override val viewModel: SearchingHistoryViewModel by viewModel()
 
-    private val historyAdapter =
-        SearchingHistoryAdapter { searchingHistoryEntity ->
+    private val queryFlow = MutableStateFlow("")
 
+    private val historyAdapter =
+        SearchingHistoryAdapter { historyItem ->
+            mainController.openWordDetailsFromHistory(historyItem)
         }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,7 +46,31 @@ class SearchingHistoryFragment :
             renderData(it)
         }
 
-        viewModel.getSearchingHistory()
+        binding.historySearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    queryFlow.value = query
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    queryFlow.value = newText
+                }
+                return true
+            }
+        })
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                queryFlow
+                    .debounce(300)
+                    .collect {
+                        viewModel.searchInHistory(it)
+                    }
+            }
+        }
     }
 
     override fun showResult(result: List<HistoryItem>) {

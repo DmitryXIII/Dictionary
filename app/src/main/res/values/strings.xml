@@ -12,4 +12,5 @@
     <string name="transcription_title">Транскрипция:</string>
     <string name="example_note_title">Пример:</string>
     <string name="empty_string">---</string>
+    <string name="history_searching_hint">Поиск в истории запросов</string>
 </resources>

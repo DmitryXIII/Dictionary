@@ -8,7 +8,7 @@ import coil.load
 import com.ineedyourcode.dictionary.databinding.FragmentWordDetailsItemBinding
 import com.ineedyourcode.dictionary.domain.entity.WordMeaning
 
-private const val BASE_URL = "https:"
+private const val IMAGE_URL_PREFIX = "https:"
 
 class WordDetailsAdapter : RecyclerView.Adapter<WordDetailsViewHolder>() {
     private var dataList: List<WordMeaning> = listOf()
@@ -36,7 +36,7 @@ class WordDetailsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             translationTextView.text = wordMeaning.translation
             transcriptionTextView.text = wordMeaning.transcription
             exampleNoteTextView.text = wordMeaning.note
-            wordImageView.load("$BASE_URL${wordMeaning.imageUrl}")
+            wordImageView.load("$IMAGE_URL_PREFIX${wordMeaning.imageUrl}")
         }
     }
 }

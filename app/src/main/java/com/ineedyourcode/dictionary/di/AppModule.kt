@@ -12,7 +12,7 @@ import com.ineedyourcode.dictionary.domain.usecase.DetailsUsecase
 import com.ineedyourcode.dictionary.domain.usecase.GatewayUsecase
 import com.ineedyourcode.dictionary.domain.usecase.HistoryUsecase
 import com.ineedyourcode.dictionary.domain.usecase.WordSearchingUsecase
-import com.ineedyourcode.dictionary.ui.searchinghistory.SearchingHistoryViewModel
+import com.ineedyourcode.dictionary.ui.history.SearchingHistoryViewModel
 import com.ineedyourcode.dictionary.ui.worddetails.WordDetailsViewModel
 import com.ineedyourcode.dictionary.ui.wordsearching.WordSearchingViewModel
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory

@@ -23,7 +23,7 @@ class WordSearchingFragment :
 
     private val wordTranslateAdapter = WordSearchingFragmentRecyclerViewAdapter {
         viewModel.saveSearchingResultToHistory(it)
-        mainController.openWordDetails(it)
+        mainController.openWordDetailsWithSavingToHistory(it)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,7 +55,7 @@ class WordSearchingFragment :
         }
 
         binding.historyFab.setOnClickListener {
-            mainController.navigateToHistory()
+            mainController.openHistory()
         }
     }
 

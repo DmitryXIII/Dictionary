@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/history_item_height"
-    android:layout_margin="@dimen/padding_8dp"
+    android:layout_marginVertical="@dimen/margin_4dp"
     android:background="@android:color/holo_orange_light">
 
     <TextView
         android:id="@+id/history_item_title_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/zero_value"
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/history_favorite_icon_image_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/lorem" />
@@ -22,10 +23,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/padding_8dp"
-        android:src="@android:drawable/star_big_off"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
