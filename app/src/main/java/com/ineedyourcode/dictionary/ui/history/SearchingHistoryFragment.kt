@@ -1,7 +1,6 @@
 package com.ineedyourcode.dictionary.ui.history
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
@@ -14,25 +13,30 @@ import com.ineedyourcode.dictionary.domain.entity.HistoryItem
 import com.ineedyourcode.dictionary.ui.BaseFragment
 import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
 import com.ineedyourcode.dictionary.ui.uils.showErrorSnack
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
+private const val DEFAULT_QUERY_VALUE = ""
 
 class SearchingHistoryFragment :
     BaseFragment<FragmentSearchingHistoryBinding, List<HistoryItem>>(
         FragmentSearchingHistoryBinding::inflate) {
     override val viewModel: SearchingHistoryViewModel by viewModel()
 
-    private val queryFlow = MutableStateFlow("")
+    private val queryFlow = MutableStateFlow(DEFAULT_QUERY_VALUE)
+
+    private val onItemClickAction = { historyItem: HistoryItem ->
+        mainController.openWordDetailsFromHistory(historyItem)
+    }
+
+    private val onFavoriteIconClickListener = { historyItem: HistoryItem ->
+
+    }
 
     private val historyAdapter =
-        SearchingHistoryAdapter { historyItem ->
-            mainController.openWordDetailsFromHistory(historyItem)
-        }
+        SearchingHistoryAdapter(onItemClickAction, onFavoriteIconClickListener)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,10 +44,6 @@ class SearchingHistoryFragment :
         binding.historyRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = historyAdapter
-        }
-
-        viewModel.getData().observe(viewLifecycleOwner) {
-            renderData(it)
         }
 
         binding.historySearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -67,7 +67,11 @@ class SearchingHistoryFragment :
                 queryFlow
                     .debounce(300)
                     .collect {
-                        viewModel.searchInHistory(it)
+                        launch {
+                            viewModel.searchInHistory(it).collect { historyItemList ->
+                                showResult(historyItemList)
+                            }
+                        }
                     }
             }
         }

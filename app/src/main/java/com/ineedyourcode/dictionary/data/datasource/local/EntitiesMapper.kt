@@ -51,12 +51,14 @@ class EntitiesMapper {
         }
     }
 
-    fun convertHistoryEntityToHistoryItem(historyEntity: HistoryEntity): HistoryItem {
-        return with(historyEntity) {
+    fun convertHistoryEntityListToHistoryItemList(
+        historyEntityList: List<HistoryEntity>,
+    ): List<HistoryItem> {
+        return historyEntityList.map {
             HistoryItem(
-                ID = id,
-                word = word,
-                isFavorite = isFavorite
+                ID = it.id,
+                word = it.word,
+                isFavorite = it.isFavorite
             )
         }
     }

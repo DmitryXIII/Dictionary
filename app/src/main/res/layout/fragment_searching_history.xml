@@ -18,9 +18,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/history_recycler_view"
         android:layout_width="@dimen/zero_value"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/zero_value"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/history_search_view" />
 
     <com.github.ybq.android.spinkit.SpinKitView
