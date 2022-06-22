@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface HistoryUsecase {
     fun getHistory(query: String): Flow<List<HistoryItem>>
-    fun addToFavorite(word: String)
+    fun updateFavorite(historyItem: HistoryItem)
     fun deleteFromFavorite(word: String)
     fun addToHistory(searchingResultItem: SearchingResultItem)
 }

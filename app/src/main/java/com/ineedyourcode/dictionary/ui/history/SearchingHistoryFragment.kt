@@ -15,6 +15,7 @@ import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
 import com.ineedyourcode.dictionary.ui.uils.showErrorSnack
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -32,7 +33,7 @@ class SearchingHistoryFragment :
     }
 
     private val onFavoriteIconClickListener = { historyItem: HistoryItem ->
-
+        viewModel.updateFavorite(historyItem)
     }
 
     private val historyAdapter =
@@ -66,13 +67,8 @@ class SearchingHistoryFragment :
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 queryFlow
                     .debounce(300)
-                    .collect {
-                        launch {
-                            viewModel.searchInHistory(it).collect { historyItemList ->
-                                showResult(historyItemList)
-                            }
-                        }
-                    }
+                    .flatMapLatest { viewModel.searchInHistory(it) }
+                    .collect { showResult(it) }
             }
         }
     }

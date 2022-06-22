@@ -1,7 +1,6 @@
 package com.ineedyourcode.dictionary.data.repository
 
 import com.ineedyourcode.dictionary.data.datasource.local.RoomDataSource
-import com.ineedyourcode.dictionary.data.datasource.local.entities.HistoryEntity
 import com.ineedyourcode.dictionary.data.datasource.remote.RetrofitDataSource
 import com.ineedyourcode.dictionary.domain.entity.HistoryItem
 import com.ineedyourcode.dictionary.domain.entity.SearchingResultItem
@@ -21,8 +20,8 @@ class WordGateway(
         addToHistory(searchingResultItem)
     }
 
-    override fun addToFavorite(word: String) {
-        localDataSource.addToFavorite(word)
+    override fun updateFavorite(historyItem: HistoryItem) {
+        localDataSource.updateFavorite(historyItem)
     }
 
     override fun deleteFromFavorite(word: String) {

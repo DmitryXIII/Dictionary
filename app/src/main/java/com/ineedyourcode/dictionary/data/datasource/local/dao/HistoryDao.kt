@@ -1,9 +1,6 @@
 package com.ineedyourcode.dictionary.data.datasource.local.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.ineedyourcode.dictionary.data.datasource.local.entities.HistoryEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -15,8 +12,8 @@ interface HistoryDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addToHistory(historyEntity: HistoryEntity)
 
-    @Query("UPDATE HistoryEntity SET isFavorite = 1 WHERE word = :word")
-    fun addToFavorite(word: String)
+    @Update
+    fun updateFavorite(historyEntity: HistoryEntity)
 
     @Query("UPDATE HistoryEntity SET isFavorite = 0 WHERE word = :word")
     fun deleteFromFavorite(word: String)

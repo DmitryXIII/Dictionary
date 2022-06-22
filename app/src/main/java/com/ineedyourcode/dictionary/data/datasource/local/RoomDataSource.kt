@@ -2,7 +2,6 @@ package com.ineedyourcode.dictionary.data.datasource.local
 
 import com.ineedyourcode.dictionary.data.datasource.local.dao.HistoryDao
 import com.ineedyourcode.dictionary.data.datasource.local.dao.WordMeaningDao
-import com.ineedyourcode.dictionary.data.datasource.local.entities.HistoryEntity
 import com.ineedyourcode.dictionary.domain.entity.HistoryItem
 import com.ineedyourcode.dictionary.domain.entity.SearchingResultItem
 import com.ineedyourcode.dictionary.domain.entity.WordMeaning
@@ -30,8 +29,8 @@ class RoomDataSource(
         }
     }
 
-    override fun addToFavorite(word: String) {
-        historyDao.addToFavorite(word)
+    override fun updateFavorite(historyItem: HistoryItem) {
+        historyDao.updateFavorite(entityMapper.convertHistoryItemToHistoryEntity(historyItem))
     }
 
     override fun deleteFromFavorite(word: String) {
