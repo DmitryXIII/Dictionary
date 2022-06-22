@@ -58,8 +58,7 @@ class MainActivity : AppCompatActivity(), ActivityContract {
     }
 
     override fun openWordDetails(searchingResultItem: SearchingResultItem) {
-        navigateTo(WordDetailsFragment.newInstance(searchingResultItem.wordTranslation,
-            searchingResultItem.ID))
+        navigateTo(WordDetailsFragment.newInstance(searchingResultItem.wordTranslation))
     }
 
     private fun navigateTo(destination: Fragment) {

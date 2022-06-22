@@ -35,11 +35,7 @@ class WordDetailsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         FragmentWordDetailsItemBinding.bind(itemView).apply {
             translationTextView.text = wordMeaning.translation
             transcriptionTextView.text = wordMeaning.transcription
-
-            if (!wordMeaning.note.isNullOrBlank()) {
-                exampleNoteTextView.text = wordMeaning.note
-            }
-
+            exampleNoteTextView.text = wordMeaning.note
             wordImageView.load("$BASE_URL${wordMeaning.imageUrl}")
         }
     }

@@ -14,7 +14,11 @@ class SearchingDtoMapper {
 
     private fun convertMeaningDtoToWordMeaning(meaningDto: MeaningDto): WordMeaning {
         with(meaningDto) {
-            return WordMeaning(ID, imageUrl, transcription, translation.text, translation.note)
+            return WordMeaning(ID,
+                imageUrl,
+                transcription,
+                translation.text,
+                translation.note ?: "---")
         }
     }
 }

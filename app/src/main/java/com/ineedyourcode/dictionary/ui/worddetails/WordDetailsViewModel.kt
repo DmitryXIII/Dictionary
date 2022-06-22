@@ -1,12 +1,14 @@
 package com.ineedyourcode.dictionary.ui.worddetails
 
 import androidx.lifecycle.LiveData
+import com.ineedyourcode.dictionary.domain.usecase.DetailsUsecase
 import com.ineedyourcode.dictionary.domain.usecase.GatewayUsecase
+import com.ineedyourcode.dictionary.domain.usecase.HistoryUsecase
 import com.ineedyourcode.dictionary.ui.AppState
 import com.ineedyourcode.dictionary.ui.ViewModelContract
 import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
 
-class WordDetailsViewModel(private val gateway: GatewayUsecase) :
+class WordDetailsViewModel(private val gateway: DetailsUsecase) :
     ViewModelContract.BaseViewModel() {
 
     fun getWordMeanings(wordId: String): LiveData<AppState> {

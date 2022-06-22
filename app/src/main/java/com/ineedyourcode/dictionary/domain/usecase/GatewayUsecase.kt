@@ -1,4 +1,4 @@
 package com.ineedyourcode.dictionary.domain.usecase
 
-interface GatewayUsecase: HistoryUsecase, WordSearchingUsecase {
+interface GatewayUsecase: HistoryUsecase, WordSearchingUsecase, DetailsUsecase {
 }

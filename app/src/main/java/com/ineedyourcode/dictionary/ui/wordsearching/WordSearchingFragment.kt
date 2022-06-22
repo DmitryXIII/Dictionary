@@ -22,7 +22,7 @@ class WordSearchingFragment :
     override val viewModel: WordSearchingViewModel by stateViewModel()
 
     private val wordTranslateAdapter = WordSearchingFragmentRecyclerViewAdapter {
-        viewModel.addToHistory(it)
+        viewModel.saveSearchingResultToHistory(it)
         mainController.openWordDetails(it)
     }
 

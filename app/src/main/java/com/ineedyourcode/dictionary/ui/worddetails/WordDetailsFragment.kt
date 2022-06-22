@@ -13,21 +13,19 @@ import com.ineedyourcode.dictionary.ui.uils.showErrorSnack
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val WORD_ARG_KEY = "WORD_ARG_KEY"
-private const val WORD_ID_ARG_KEY = "WORD_ID_ARG_KEY"
 
 class WordDetailsFragment :
     BaseFragment<FragmentWordDetailsBinding, List<WordMeaning>>(FragmentWordDetailsBinding::inflate) {
 
     private var currentWord: String? = null
-    private var currentWordId: String? = null
     private val detailsAdapter = WordDetailsAdapter()
 
     override val viewModel: WordDetailsViewModel by viewModel()
 
     companion object {
-        fun newInstance(word: String, wordId: String): WordDetailsFragment {
+        fun newInstance(word: String): WordDetailsFragment {
             return WordDetailsFragment().apply {
-                arguments = bundleOf(WORD_ARG_KEY to word, WORD_ID_ARG_KEY to wordId)
+                arguments = bundleOf(WORD_ARG_KEY to word)
             }
         }
     }
@@ -36,7 +34,6 @@ class WordDetailsFragment :
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
             currentWord = it.getString(WORD_ARG_KEY)
-            currentWordId = it.getString(WORD_ID_ARG_KEY)
         }
 
         binding.detailsRecyclerView.apply {
@@ -44,17 +41,13 @@ class WordDetailsFragment :
             adapter = detailsAdapter
         }
 
-        currentWordId?.let {
+        currentWord?.let {
             viewModel.getWordMeanings(it).observe(viewLifecycleOwner) { state ->
                 renderData(state)
             }
         }
 
         binding.detailsWordTitleTextView.text = currentWord
-
-//        currentWord?.wordMeanings?.let {
-//            detailsAdapter.setData(it)
-//        }
     }
 
 

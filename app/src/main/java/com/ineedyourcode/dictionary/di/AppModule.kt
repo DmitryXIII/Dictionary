@@ -8,8 +8,10 @@ import com.ineedyourcode.dictionary.data.datasource.remote.RetrofitDataSource
 import com.ineedyourcode.dictionary.data.datasource.remote.SearchingDtoMapper
 import com.ineedyourcode.dictionary.data.datasource.remote.SkyengApi
 import com.ineedyourcode.dictionary.data.repository.WordGateway
+import com.ineedyourcode.dictionary.domain.usecase.DetailsUsecase
 import com.ineedyourcode.dictionary.domain.usecase.GatewayUsecase
 import com.ineedyourcode.dictionary.domain.usecase.HistoryUsecase
+import com.ineedyourcode.dictionary.domain.usecase.WordSearchingUsecase
 import com.ineedyourcode.dictionary.ui.searchinghistory.SearchingHistoryViewModel
 import com.ineedyourcode.dictionary.ui.worddetails.WordDetailsViewModel
 import com.ineedyourcode.dictionary.ui.wordsearching.WordSearchingViewModel
@@ -46,6 +48,14 @@ val datasourceModule = module {
     }
 
     single<HistoryUsecase> {
+        WordGateway(remoteDataSource = get(), localDataSource = get())
+    }
+
+    single<WordSearchingUsecase> {
+        WordGateway(remoteDataSource = get(), localDataSource = get())
+    }
+
+    single<DetailsUsecase> {
         WordGateway(remoteDataSource = get(), localDataSource = get())
     }
 

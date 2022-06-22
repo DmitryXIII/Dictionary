@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 @Entity
 data class WordMeaningEntity(
     @PrimaryKey
-    val id: String,
-    val meaningOwnerId: String,
+    val ID: String,
+    val meaningOwnerWord: String,
     val imageUrl: String,
     val transcription: String,
     val translation: String,

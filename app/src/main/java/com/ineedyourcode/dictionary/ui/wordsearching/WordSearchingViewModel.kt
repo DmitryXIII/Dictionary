@@ -5,7 +5,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.ineedyourcode.dictionary.domain.entity.ResponseCodes
 import com.ineedyourcode.dictionary.domain.entity.SearchingResultItem
-import com.ineedyourcode.dictionary.domain.usecase.GatewayUsecase
+import com.ineedyourcode.dictionary.domain.usecase.WordSearchingUsecase
 import com.ineedyourcode.dictionary.ui.AppState
 import com.ineedyourcode.dictionary.ui.ViewModelContract
 import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
@@ -15,7 +15,7 @@ private const val ALPHA_KEY = "ALPHA"
 private const val ALPHA_INITIAL_VALUE = 1f
 
 class WordSearchingViewModel(
-    private val gateway: GatewayUsecase,
+    private val gateway: WordSearchingUsecase,
     private val savedStateHandle: SavedStateHandle,
 ) :
     ViewModelContract.BaseViewModel() {
@@ -40,8 +40,8 @@ class WordSearchingViewModel(
         }
     }
 
-    fun addToHistory(searchingResultItem: SearchingResultItem) {
-        gateway.addToHistory(searchingResultItem)
+    fun saveSearchingResultToHistory(searchingResultItem: SearchingResultItem) {
+        gateway.saveSearchingResultToHistory(searchingResultItem)
     }
 
     fun saveLottieVisibilityState(alpha: Float) {
