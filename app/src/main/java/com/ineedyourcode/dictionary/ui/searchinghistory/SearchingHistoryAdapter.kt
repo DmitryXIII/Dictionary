@@ -6,12 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ineedyourcode.dictionary.data.datasource.local.entities.HistoryEntity
 import com.ineedyourcode.dictionary.databinding.FragmentSearchingHistoryItemBinding
+import com.ineedyourcode.dictionary.domain.entity.HistoryItem
 
-class SearchingHistoryAdapter(private val listener: (HistoryEntity) -> Unit) :
+class SearchingHistoryAdapter(private val listener: (HistoryItem) -> Unit) :
     RecyclerView.Adapter<SearchingHistoryAdapter.SearchingHistoryViewHolder>() {
-    private var dataList = listOf<HistoryEntity>()
+    private var dataList = listOf<HistoryItem>()
 
-    fun setData(list: List<HistoryEntity>) {
+    fun setData(list: List<HistoryItem>) {
         dataList = list
         notifyItemRangeInserted(0, dataList.lastIndex)
     }
@@ -30,17 +31,17 @@ class SearchingHistoryAdapter(private val listener: (HistoryEntity) -> Unit) :
     override fun getItemCount() = dataList.size
 
     inner class SearchingHistoryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(historyEntity: HistoryEntity) {
+        fun bind(historyItem: HistoryItem) {
             FragmentSearchingHistoryItemBinding.bind(itemView).apply {
-                historyItemTitleTextView.text = historyEntity.word
-                historyFavoriteIconImageView.setImageResource(when (historyEntity.isFavorite) {
+                historyItemTitleTextView.text = historyItem.word
+                historyFavoriteIconImageView.setImageResource(when (historyItem.isFavorite) {
                     true -> android.R.drawable.star_big_on
                     false -> android.R.drawable.star_big_off
                 })
-                var isFavorite = historyEntity.isFavorite
+                var isFavorite = historyItem.isFavorite
 
                 historyFavoriteIconImageView.setOnClickListener {
-                    listener.invoke(historyEntity)
+                    listener.invoke(historyItem)
 
                     historyFavoriteIconImageView.setImageResource(when (isFavorite) {
                         true -> {
@@ -51,7 +52,6 @@ class SearchingHistoryAdapter(private val listener: (HistoryEntity) -> Unit) :
                         }
                     })
                     isFavorite = !isFavorite
-//                    notifyItemChanged(adapterPosition)
                 }
             }
         }
