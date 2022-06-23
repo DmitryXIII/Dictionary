@@ -55,7 +55,6 @@ class SearchingHistoryFragment :
                 queryFlow
                     .debounce(300)
                     .flatMapLatest { viewModel.searchInHistory(it) }
-                    .distinctUntilChanged()
                     .collect { showResult(it) }
             }
         }
