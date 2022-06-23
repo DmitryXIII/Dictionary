@@ -6,7 +6,6 @@ import com.ineedyourcode.dictionary.domain.entity.SearchingResultItem
 interface ActivityContract {
     fun checkInternet(): Boolean
     fun openHistory()
-    fun navigateToFavorite()
     fun openWordDetailsWithSavingToHistory(searchingResultItem: SearchingResultItem)
     fun openWordDetailsFromHistory(historyItem: HistoryItem)
 }

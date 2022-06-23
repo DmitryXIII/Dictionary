@@ -54,10 +54,6 @@ class MainActivity : AppCompatActivity(), ActivityContract {
         navigateTo(SearchingHistoryFragment())
     }
 
-    override fun navigateToFavorite() {
-
-    }
-
     override fun openWordDetailsWithSavingToHistory(searchingResultItem: SearchingResultItem) {
         navigateTo(WordDetailsFragment.newInstance(searchingResultItem.wordTranslation))
     }
