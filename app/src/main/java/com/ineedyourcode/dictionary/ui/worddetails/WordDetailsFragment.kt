@@ -19,7 +19,6 @@ private const val WORD_ARG_KEY = "WORD_ARG_KEY"
 class WordDetailsFragment :
     BaseFragment<FragmentWordDetailsBinding, List<WordMeaning>>(FragmentWordDetailsBinding::inflate) {
 
-    private var currentWord: String? = null
     private var currentHistoryItem: HistoryItem? = null
     private val detailsAdapter = WordDetailsAdapter()
 
@@ -36,26 +35,23 @@ class WordDetailsFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
-            currentWord = it.getString(WORD_ARG_KEY)
+            it.getString(WORD_ARG_KEY)?.let { word ->
+                viewModel.getHistoryItem(word).observe(viewLifecycleOwner) { historyItem ->
+                    currentHistoryItem = historyItem
+                    binding.detailsFavoriteImageView.setFavoriteIcon(historyItem)
+                }
+
+                viewModel.getWordMeanings(word).observe(viewLifecycleOwner) { state ->
+                    renderData(state)
+                }
+                binding.detailsWordTitleTextView.text = word
+            }
         }
 
         binding.detailsRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = detailsAdapter
         }
-
-        currentWord?.let { it ->
-            viewModel.getHistoryItem(it).observe(viewLifecycleOwner) {
-                currentHistoryItem = it
-                binding.detailsFavoriteImageView.setFavoriteIcon(it)
-            }
-
-            viewModel.getWordMeanings(it).observe(viewLifecycleOwner) { state ->
-                renderData(state)
-            }
-        }
-
-        binding.detailsWordTitleTextView.text = currentWord
 
         binding.detailsFavoriteImageView.apply {
             setOnClickListener {

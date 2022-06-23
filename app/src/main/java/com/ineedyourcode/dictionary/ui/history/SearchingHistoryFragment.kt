@@ -15,6 +15,7 @@ import com.ineedyourcode.dictionary.ui.uils.setOnTypeTextListener
 import com.ineedyourcode.dictionary.ui.uils.showErrorSnack
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -54,6 +55,7 @@ class SearchingHistoryFragment :
                 queryFlow
                     .debounce(300)
                     .flatMapLatest { viewModel.searchInHistory(it) }
+                    .distinctUntilChanged()
                     .collect { showResult(it) }
             }
         }
