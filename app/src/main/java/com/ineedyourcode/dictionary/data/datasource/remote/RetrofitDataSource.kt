@@ -1,32 +1,12 @@
 package com.ineedyourcode.dictionary.data.datasource.remote
 
-import com.ineedyourcode.dictionary.domain.entity.ResponseCodes
-import com.ineedyourcode.dictionary.domain.entity.SearchingResult
-import com.ineedyourcode.dictionary.domain.usecase.WordSearchingCallback
-import com.ineedyourcode.dictionary.domain.usecase.WordSearchingUsecase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.ineedyourcode.dictionary.domain.usecase.RemoteDatasourceUsecase
 
 class RetrofitDataSource(
     private val retrofit: SkyengApi,
     private val mapper: SearchingDtoMapper,
-) : WordSearchingUsecase {
+) : RemoteDatasourceUsecase {
 
-    override fun search(word: String, callback: WordSearchingCallback<List<SearchingResult>>) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val result = retrofit.search(word)
-            if (result.isSuccessful) {
-                result.body()?.let {
-                    if (it.isNotEmpty()) {
-                        callback.onSuccess(mapper.convertSearchingResultDtoListToEntityList(it))
-                    } else {
-                        callback.onError(ResponseCodes.INVALID_REQUEST.code)
-                    }
-                }
-            } else {
-                callback.onError(result.message())
-            }
-        }
-    }
+    override suspend fun searchInDictionary(word: String) =
+        retrofit.searchAsync(word).await().map { mapper.convertResultDtoToEntity(it) }
 }

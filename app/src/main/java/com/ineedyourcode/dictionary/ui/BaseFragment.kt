@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.ineedyourcode.dictionary.R
+import com.ineedyourcode.dictionary.ui.uils.ActivityContract
 import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
 import com.ineedyourcode.dictionary.ui.uils.hideKeyboard
-import com.ineedyourcode.dictionary.ui.wordsearching.WordSearchingViewModelContract
 
 abstract class BaseFragment<VB : ViewBinding, T>(
     private val inflateBinding: (
@@ -22,9 +22,9 @@ abstract class BaseFragment<VB : ViewBinding, T>(
     private var _binding: VB? = null
     val binding: VB get() = _binding!!
 
-    private lateinit var connectionChecker: InternetConnectionChecker
+    protected lateinit var mainController: ActivityContract
 
-    abstract val viewModel: WordSearchingViewModelContract.BaseViewModel
+    abstract val viewModel: ViewModelContract.BaseViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,10 +37,10 @@ abstract class BaseFragment<VB : ViewBinding, T>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (requireActivity() is InternetConnectionChecker) {
-            connectionChecker = requireActivity() as InternetConnectionChecker
+        if (requireActivity() is ActivityContract) {
+            mainController = requireActivity() as ActivityContract
         } else {
-            throw IllegalStateException(getString(R.string.no_is_internet_connection_checker))
+            throw IllegalStateException(getString(R.string.no_is_main_controller))
         }
     }
 
@@ -49,8 +49,8 @@ abstract class BaseFragment<VB : ViewBinding, T>(
         _binding = null
     }
 
-    abstract fun showTranslatingResult(result: T)
-    abstract fun showTranslatingError(error: ErrorMapper)
+    abstract fun showResult(result: T)
+    abstract fun showError(error: ErrorMapper)
     abstract fun showProgress()
     abstract fun hideProgress()
 
@@ -63,18 +63,18 @@ abstract class BaseFragment<VB : ViewBinding, T>(
             is AppState.Success -> {
                 hideProgress()
                 @Suppress("UNCHECKED_CAST")
-                showTranslatingResult(state.result as T)
+                showResult(state.result as T)
             }
 
             is AppState.Error -> {
                 hideProgress()
-                showTranslatingError(state.error)
+                showError(state.error)
             }
         }
     }
 
     protected fun ifConnectedToInternet(action: () -> Unit) {
-        if (connectionChecker.checkInternet()) {
+        if (mainController.checkInternet()) {
             binding.root.hideKeyboard()
             action()
         }

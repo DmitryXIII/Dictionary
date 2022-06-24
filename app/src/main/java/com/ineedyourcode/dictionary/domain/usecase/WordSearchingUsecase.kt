@@ -1,7 +1,7 @@
 package com.ineedyourcode.dictionary.domain.usecase
 
-import com.ineedyourcode.dictionary.domain.entity.SearchingResult
+import com.ineedyourcode.dictionary.domain.entity.SearchingResultItem
 
-interface WordSearchingUsecase {
-    fun search(word: String, callback: WordSearchingCallback<List<SearchingResult>>)
+interface WordSearchingUsecase : RemoteDatasourceUsecase {
+    fun saveSearchingResultToHistory(searchingResultItem: SearchingResultItem)
 }

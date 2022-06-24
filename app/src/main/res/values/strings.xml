@@ -6,5 +6,11 @@
     <string name="error_300_message">Некорректный запрос</string>
     <string name="error_301_message">Введите слово для перевода</string>
     <string name="ok">OK</string>
-    <string name="no_is_internet_connection_checker">Активити должна имплементировать InternetConnectionChecker</string>
+    <string name="no_is_main_controller">Активити должна имплементировать ActivityContract</string>
+    <string name="history_fab">history_fab</string>
+    <string name="translation_title">Перевод:</string>
+    <string name="transcription_title">Транскрипция:</string>
+    <string name="example_note_title">Пример:</string>
+    <string name="empty_string">---</string>
+    <string name="history_searching_hint">Поиск в истории запросов</string>
 </resources>

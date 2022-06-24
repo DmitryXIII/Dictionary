@@ -6,7 +6,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ineedyourcode.dictionary.databinding.FragmentWordSearchingBinding
-import com.ineedyourcode.dictionary.domain.entity.SearchingResult
+import com.ineedyourcode.dictionary.domain.entity.SearchingResultItem
 import com.ineedyourcode.dictionary.ui.BaseFragment
 import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
 import com.ineedyourcode.dictionary.ui.uils.showErrorSnack
@@ -17,11 +17,14 @@ private const val ANIMATION_ALPHA_VISIBLE = 1f
 private const val ANIMATION_ALPHA_INVISIBLE = 0f
 
 class WordSearchingFragment :
-    BaseFragment<FragmentWordSearchingBinding, List<SearchingResult>>(FragmentWordSearchingBinding::inflate) {
-
-    private val wordTranslateAdapter = WordSearchingFragmentRecyclerViewAdapter()
+    BaseFragment<FragmentWordSearchingBinding,List<SearchingResultItem>>(FragmentWordSearchingBinding::inflate) {
 
     override val viewModel: WordSearchingViewModel by stateViewModel()
+
+    private val wordTranslateAdapter = WordSearchingFragmentRecyclerViewAdapter {
+        viewModel.saveSearchingResultToHistory(it)
+        mainController.openWordDetailsWithSavingToHistory(it)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,6 +53,10 @@ class WordSearchingFragment :
             }
             false
         }
+
+        binding.historyFab.setOnClickListener {
+            mainController.openHistory()
+        }
     }
 
     private fun searchWord() {
@@ -58,12 +65,12 @@ class WordSearchingFragment :
         }
     }
 
-    override fun showTranslatingResult(result: List<SearchingResult>) {
+    override fun showResult(result: List<SearchingResultItem>) {
         wordTranslateAdapter.setData(result)
         binding.wordTranslateRecyclerView.adapter = wordTranslateAdapter
     }
 
-    override fun showTranslatingError(error: ErrorMapper) {
+    override fun showError(error: ErrorMapper) {
         wordTranslateAdapter.clearData()
         binding.wordTranslateRecyclerView.adapter = wordTranslateAdapter
         binding.wordTranslateRecyclerView.isVisible = false
