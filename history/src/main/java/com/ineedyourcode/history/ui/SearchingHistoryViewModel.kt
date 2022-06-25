@@ -1,8 +1,8 @@
-package com.ineedyourcode.dictionary.ui.history
+package com.ineedyourcode.history.ui
 
+import com.ineedyourcode.core.ui.ViewModelContract
 import com.ineedyourcode.domain.entity.HistoryItem
 import com.ineedyourcode.domain.usecase.HistoryUsecase
-import com.ineedyourcode.dictionary.ui.ViewModelContract
 import kotlinx.coroutines.flow.Flow
 
 class SearchingHistoryViewModel(private val gateway: HistoryUsecase) :

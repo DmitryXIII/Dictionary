@@ -1,0 +1,16 @@
+<resources>
+<!--    <string name="app_name">Dictionary</string>-->
+<!--    <string name="translated_word_example">Переведенное слово</string>-->
+<!--    <string name="translated_word_description_example">Описание переведенного слова</string>-->
+<!--    <string name="word_translate_input_layout_hint">Что перевести?</string>-->
+    <string name="error_300_message">Некорректный запрос</string>
+    <string name="error_301_message">Введите слово для перевода</string>
+<!--    <string name="ok">OK</string>-->
+    <string name="no_is_main_controller">Активити должна имплементировать ActivityContract</string>
+<!--    <string name="history_fab">history_fab</string>-->
+<!--    <string name="translation_title">Перевод:</string>-->
+<!--    <string name="transcription_title">Транскрипция:</string>-->
+<!--    <string name="example_note_title">Пример:</string>-->
+<!--    <string name="empty_string">-&#45;&#45;</string>-->
+<!--    <string name="history_searching_hint">Поиск в истории запросов</string>-->
+</resources>

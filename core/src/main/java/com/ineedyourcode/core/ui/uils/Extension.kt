@@ -1,4 +1,4 @@
-package com.ineedyourcode.dictionary.ui.uils
+package com.ineedyourcode.core.ui.uils
 
 import android.content.Context
 import android.view.View
@@ -27,7 +27,7 @@ fun View.hideKeyboard(): Boolean {
     return inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
 }
 
-fun SearchView.setOnTypeTextListener(stateFlow: MutableStateFlow<String>) {
+fun androidx.appcompat.widget.SearchView.setOnTypeTextListener(stateFlow: MutableStateFlow<String>) {
     this.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String?): Boolean {
             query?.let {

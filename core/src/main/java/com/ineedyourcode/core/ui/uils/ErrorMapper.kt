@@ -1,6 +1,6 @@
-package com.ineedyourcode.dictionary.ui.uils
+package com.ineedyourcode.core.ui.uils
 
-import com.ineedyourcode.dictionary.R
+import com.ineedyourcode.core.R
 import com.ineedyourcode.domain.entity.ResponseCodes
 
 @Suppress("UNCHECKED_CAST")

@@ -17,3 +17,4 @@ rootProject.name = "Dictionary"
 include ':app'
 include ':domain'
 include ':core'
+include ':history'

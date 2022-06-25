@@ -6,6 +6,6 @@ import com.ineedyourcode.domain.entity.SearchingResultItem
 interface ActivityContract {
     fun checkInternet(): Boolean
     fun openHistory()
-    fun openWordDetailsWithSavingToHistory(searchingResultItem: SearchingResultItem)
-    fun openWordDetailsFromHistory(historyItem: HistoryItem)
+    fun openWordDetailsWithSavingToHistory(wordTranslation: String)
+    fun openWordDetailsFromHistory(word: String)
 }

@@ -3,12 +3,12 @@ package com.ineedyourcode.dictionary.ui.wordsearching
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import com.ineedyourcode.core.ui.AppState
+import com.ineedyourcode.core.ui.ViewModelContract
 import com.ineedyourcode.domain.entity.ResponseCodes
 import com.ineedyourcode.domain.entity.SearchingResultItem
 import com.ineedyourcode.domain.usecase.WordSearchingUsecase
-import com.ineedyourcode.dictionary.ui.AppState
-import com.ineedyourcode.dictionary.ui.ViewModelContract
-import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
+import com.ineedyourcode.core.ui.uils.ErrorMapper
 import kotlinx.coroutines.launch
 
 private const val ALPHA_KEY = "ALPHA"

@@ -1,12 +1,12 @@
-package com.ineedyourcode.dictionary.ui.history
+package com.ineedyourcode.history.ui
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ineedyourcode.dictionary.databinding.FragmentSearchingHistoryItemBinding
+import com.ineedyourcode.core.ui.uils.setFavoriteIcon
 import com.ineedyourcode.domain.entity.HistoryItem
-import com.ineedyourcode.dictionary.ui.uils.setFavoriteIcon
+import com.ineedyourcode.history.databinding.FragmentSearchingHistoryItemBinding
 
 class SearchingHistoryAdapter(
     private val onItemClickListener: (HistoryItem) -> Unit,

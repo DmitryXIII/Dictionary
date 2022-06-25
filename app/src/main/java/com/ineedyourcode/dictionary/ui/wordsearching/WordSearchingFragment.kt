@@ -5,11 +5,11 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ineedyourcode.core.ui.BaseFragment
 import com.ineedyourcode.dictionary.databinding.FragmentWordSearchingBinding
 import com.ineedyourcode.domain.entity.SearchingResultItem
-import com.ineedyourcode.dictionary.ui.BaseFragment
-import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
-import com.ineedyourcode.dictionary.ui.uils.showErrorSnack
+import com.ineedyourcode.core.ui.uils.ErrorMapper
+import com.ineedyourcode.core.ui.uils.showErrorSnack
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
 private const val ANIMATION_DURATION = 100L
@@ -17,13 +17,13 @@ private const val ANIMATION_ALPHA_VISIBLE = 1f
 private const val ANIMATION_ALPHA_INVISIBLE = 0f
 
 class WordSearchingFragment :
-    BaseFragment<FragmentWordSearchingBinding,List<SearchingResultItem>>(FragmentWordSearchingBinding::inflate) {
+    BaseFragment<FragmentWordSearchingBinding, List<SearchingResultItem>>(FragmentWordSearchingBinding::inflate) {
 
     override val viewModel: WordSearchingViewModel by stateViewModel()
 
     private val wordTranslateAdapter = WordSearchingFragmentRecyclerViewAdapter {
         viewModel.saveSearchingResultToHistory(it)
-        mainController.openWordDetailsWithSavingToHistory(it)
+        mainController.openWordDetailsWithSavingToHistory(it.wordTranslation)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -5,13 +5,13 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ineedyourcode.core.ui.BaseFragment
+import com.ineedyourcode.core.ui.uils.setFavoriteIcon
+import com.ineedyourcode.core.ui.uils.showErrorSnack
 import com.ineedyourcode.dictionary.databinding.FragmentWordDetailsBinding
+import com.ineedyourcode.core.ui.uils.ErrorMapper
 import com.ineedyourcode.domain.entity.HistoryItem
 import com.ineedyourcode.domain.entity.WordMeaning
-import com.ineedyourcode.dictionary.ui.BaseFragment
-import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
-import com.ineedyourcode.dictionary.ui.uils.setFavoriteIcon
-import com.ineedyourcode.dictionary.ui.uils.showErrorSnack
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val WORD_ARG_KEY = "WORD_ARG_KEY"

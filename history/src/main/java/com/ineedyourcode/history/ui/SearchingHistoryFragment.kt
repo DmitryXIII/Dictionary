@@ -1,4 +1,4 @@
-package com.ineedyourcode.dictionary.ui.history
+package com.ineedyourcode.history.ui
 
 import android.os.Bundle
 import android.view.View
@@ -7,12 +7,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ineedyourcode.dictionary.databinding.FragmentSearchingHistoryBinding
+import com.ineedyourcode.core.ui.BaseFragment
+import com.ineedyourcode.core.ui.uils.setOnTypeTextListener
+import com.ineedyourcode.core.ui.uils.showErrorSnack
+import com.ineedyourcode.core.ui.uils.ErrorMapper
 import com.ineedyourcode.domain.entity.HistoryItem
-import com.ineedyourcode.dictionary.ui.BaseFragment
-import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
-import com.ineedyourcode.dictionary.ui.uils.setOnTypeTextListener
-import com.ineedyourcode.dictionary.ui.uils.showErrorSnack
+import com.ineedyourcode.history.databinding.FragmentSearchingHistoryBinding
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
@@ -29,7 +29,7 @@ class SearchingHistoryFragment :
     private val queryFlow = MutableStateFlow(DEFAULT_QUERY_VALUE)
 
     private val onItemClickAction = { historyItem: HistoryItem ->
-        mainController.openWordDetailsFromHistory(historyItem)
+        mainController.openWordDetailsFromHistory(historyItem.word)
     }
 
     private val onFavoriteIconClickListener = { historyItem: HistoryItem ->

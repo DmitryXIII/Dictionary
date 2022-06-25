@@ -2,11 +2,11 @@ package com.ineedyourcode.dictionary.ui.worddetails
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.ineedyourcode.core.ui.AppState
+import com.ineedyourcode.core.ui.ViewModelContract
+import com.ineedyourcode.core.ui.uils.ErrorMapper
 import com.ineedyourcode.domain.entity.HistoryItem
 import com.ineedyourcode.domain.usecase.DetailsUsecase
-import com.ineedyourcode.dictionary.ui.AppState
-import com.ineedyourcode.dictionary.ui.ViewModelContract
-import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
 
 class WordDetailsViewModel(private val gateway: DetailsUsecase) :
     ViewModelContract.BaseViewModel() {

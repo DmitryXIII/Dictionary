@@ -1,4 +1,4 @@
-package com.ineedyourcode.dictionary.ui
+package com.ineedyourcode.core.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.ineedyourcode.dictionary.R
+import com.ineedyourcode.core.R
 import com.ineedyourcode.dictionary.ui.uils.ActivityContract
-import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
-import com.ineedyourcode.dictionary.ui.uils.hideKeyboard
+import com.ineedyourcode.core.ui.uils.ErrorMapper
+import com.ineedyourcode.core.ui.uils.hideKeyboard
 
 abstract class BaseFragment<VB : ViewBinding, T>(
     private val inflateBinding: (

@@ -1,11 +1,11 @@
-package com.ineedyourcode.dictionary.ui.uils
+package com.ineedyourcode.core.ui.uils
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.ineedyourcode.dictionary.databinding.DialogFragmentNoConnectionBinding
+import com.ineedyourcode.core.databinding.DialogFragmentNoConnectionBinding
 
 class NoConnectionDialogFragment : DialogFragment() {
     private var _binding: DialogFragmentNoConnectionBinding? = null

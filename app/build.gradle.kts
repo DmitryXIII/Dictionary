@@ -41,6 +41,7 @@ android {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":core"))
+    implementation(project(":history"))
 
     implementation(Dependencies.RETROFIT_DEP)
     implementation(Dependencies.RETROFIT_GSON_CONVERTER_DEP)

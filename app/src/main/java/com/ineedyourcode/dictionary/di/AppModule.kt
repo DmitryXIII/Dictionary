@@ -12,9 +12,9 @@ import com.ineedyourcode.domain.usecase.DetailsUsecase
 import com.ineedyourcode.domain.usecase.GatewayUsecase
 import com.ineedyourcode.domain.usecase.HistoryUsecase
 import com.ineedyourcode.domain.usecase.WordSearchingUsecase
-import com.ineedyourcode.dictionary.ui.history.SearchingHistoryViewModel
 import com.ineedyourcode.dictionary.ui.worddetails.WordDetailsViewModel
 import com.ineedyourcode.dictionary.ui.wordsearching.WordSearchingViewModel
+import com.ineedyourcode.history.ui.SearchingHistoryViewModel
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
