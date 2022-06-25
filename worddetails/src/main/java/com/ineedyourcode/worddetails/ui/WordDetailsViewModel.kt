@@ -1,4 +1,4 @@
-package com.ineedyourcode.dictionary.ui.worddetails
+package com.ineedyourcode.worddetails.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

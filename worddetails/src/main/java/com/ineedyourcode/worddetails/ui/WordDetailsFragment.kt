@@ -1,4 +1,4 @@
-package com.ineedyourcode.dictionary.ui.worddetails
+package com.ineedyourcode.worddetails.ui
 
 import android.os.Bundle
 import android.view.View
@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ineedyourcode.core.ui.BaseFragment
 import com.ineedyourcode.core.ui.uils.setFavoriteIcon
 import com.ineedyourcode.core.ui.uils.showErrorSnack
-import com.ineedyourcode.dictionary.databinding.FragmentWordDetailsBinding
 import com.ineedyourcode.core.ui.uils.ErrorMapper
 import com.ineedyourcode.domain.entity.HistoryItem
 import com.ineedyourcode.domain.entity.WordMeaning
+import com.ineedyourcode.worddetails.databinding.FragmentWordDetailsBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val WORD_ARG_KEY = "WORD_ARG_KEY"

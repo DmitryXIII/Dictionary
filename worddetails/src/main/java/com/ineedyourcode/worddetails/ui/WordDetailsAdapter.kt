@@ -1,12 +1,12 @@
-package com.ineedyourcode.dictionary.ui.worddetails
+package com.ineedyourcode.worddetails.ui
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.ineedyourcode.dictionary.databinding.FragmentWordDetailsItemBinding
 import com.ineedyourcode.domain.entity.WordMeaning
+import com.ineedyourcode.worddetails.databinding.FragmentWordDetailsItemBinding
 
 private const val IMAGE_URL_PREFIX = "https:"
 

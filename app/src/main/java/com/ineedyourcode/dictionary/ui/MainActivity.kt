@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment
 import com.ineedyourcode.dictionary.R
 import com.ineedyourcode.dictionary.ui.uils.ActivityContract
 import com.ineedyourcode.core.ui.uils.NoConnectionDialogFragment
-import com.ineedyourcode.dictionary.ui.worddetails.WordDetailsFragment
 import com.ineedyourcode.dictionary.ui.wordsearching.WordSearchingFragment
 import com.ineedyourcode.history.ui.SearchingHistoryFragment
+import com.ineedyourcode.worddetails.ui.WordDetailsFragment
 
 class MainActivity : AppCompatActivity(), ActivityContract {
 
