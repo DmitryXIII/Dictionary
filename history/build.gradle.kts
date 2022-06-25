@@ -42,15 +42,10 @@ dependencies {
     implementation(Dependencies.CORE_KTX_DEP)
     implementation(Dependencies.APPCOMPAT_DEP)
     implementation(Dependencies.ANDROID_MATERIAL_DEP)
-
     implementation(Dependencies.COROUTINES_ANDROID_DEP)
-
     implementation(Dependencies.SPINKIT_DEP)
-
     implementation(Dependencies.LIFECYCLE_KTX_DEP)
-
     implementation(Dependencies.KOIN_DEP)
-
     testImplementation(Dependencies.JUNIT_DEP)
-    testImplementation(Dependencies.TEST_JUNIT_DEP)
+    androidTestImplementation(Dependencies.TEST_JUNIT_DEP)
 }

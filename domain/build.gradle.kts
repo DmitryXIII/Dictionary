@@ -33,5 +33,5 @@ android {
 dependencies {
     implementation(Dependencies.COROUTINES_ANDROID_DEP)
     implementation(Dependencies.JUNIT_DEP)
-    implementation(Dependencies.TEST_JUNIT_DEP)
+    androidTestImplementation(Dependencies.TEST_JUNIT_DEP)
 }
