@@ -5,10 +5,10 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.ineedyourcode.core.ui.AppState
 import com.ineedyourcode.core.ui.ViewModelContract
+import com.ineedyourcode.core.ui.uils.ErrorMapper
 import com.ineedyourcode.domain.entity.ResponseCodes
 import com.ineedyourcode.domain.entity.SearchingResultItem
 import com.ineedyourcode.domain.usecase.WordSearchingUsecase
-import com.ineedyourcode.core.ui.uils.ErrorMapper
 import kotlinx.coroutines.launch
 
 private const val ALPHA_KEY = "ALPHA"

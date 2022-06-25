@@ -17,14 +17,18 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.scope.AndroidScopeComponent
+import org.koin.androidx.scope.fragmentScope
+import org.koin.core.scope.Scope
 
 private const val DEFAULT_QUERY_VALUE = ""
 
 class SearchingHistoryFragment :
     BaseFragment<FragmentSearchingHistoryBinding, List<HistoryItem>>(
-        FragmentSearchingHistoryBinding::inflate) {
-    override val viewModel: SearchingHistoryViewModel by viewModel()
+        FragmentSearchingHistoryBinding::inflate), AndroidScopeComponent {
+    override val scope: Scope by fragmentScope()
+
+    override val viewModel: SearchingHistoryViewModel by scope.inject()
 
     private val queryFlow = MutableStateFlow(DEFAULT_QUERY_VALUE)
 

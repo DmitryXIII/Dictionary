@@ -6,23 +6,28 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ineedyourcode.core.ui.BaseFragment
+import com.ineedyourcode.core.ui.uils.ErrorMapper
 import com.ineedyourcode.core.ui.uils.setFavoriteIcon
 import com.ineedyourcode.core.ui.uils.showErrorSnack
-import com.ineedyourcode.core.ui.uils.ErrorMapper
 import com.ineedyourcode.domain.entity.HistoryItem
 import com.ineedyourcode.domain.entity.WordMeaning
 import com.ineedyourcode.worddetails.databinding.FragmentWordDetailsBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.scope.AndroidScopeComponent
+import org.koin.androidx.scope.fragmentScope
+import org.koin.core.scope.Scope
 
 private const val WORD_ARG_KEY = "WORD_ARG_KEY"
 
 class WordDetailsFragment :
-    BaseFragment<FragmentWordDetailsBinding, List<WordMeaning>>(FragmentWordDetailsBinding::inflate) {
+    BaseFragment<FragmentWordDetailsBinding, List<WordMeaning>>(FragmentWordDetailsBinding::inflate),
+    AndroidScopeComponent {
+
+    override val scope: Scope by fragmentScope()
 
     private var currentHistoryItem: HistoryItem? = null
     private val detailsAdapter = WordDetailsAdapter()
 
-    override val viewModel: WordDetailsViewModel by viewModel()
+    override val viewModel: WordDetailsViewModel by scope.inject ()
 
     companion object {
         fun newInstance(word: String): WordDetailsFragment {
