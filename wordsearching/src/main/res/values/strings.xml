@@ -1,0 +1,5 @@
+<resources>
+    <string name="translated_word_example">Переведенное слово</string>
+    <string name="word_translate_input_layout_hint">Что перевести?</string>
+    <string name="history_fab">history_fab</string>
+</resources>

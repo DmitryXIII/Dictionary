@@ -1,0 +1,6 @@
+<resources>
+    <string name="error_300_message">Некорректный запрос</string>
+    <string name="error_301_message">Введите слово для перевода</string>
+    <string name="ok">OK</string>
+    <string name="no_is_main_controller">Активити должна имплементировать ActivityContract</string>
+</resources>

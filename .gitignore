@@ -8,3 +8,4 @@
 .externalNativeBuild
 .cxx
 local.properties
+/buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/class-attributes.tab
