@@ -8,9 +8,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ineedyourcode.core.ui.BaseFragment
+import com.ineedyourcode.core.ui.uils.ErrorMapper
 import com.ineedyourcode.core.ui.uils.setOnTypeTextListener
 import com.ineedyourcode.core.ui.uils.showErrorSnack
-import com.ineedyourcode.core.ui.uils.ErrorMapper
 import com.ineedyourcode.domain.entity.HistoryItem
 import com.ineedyourcode.history.databinding.FragmentSearchingHistoryBinding
 import kotlinx.coroutines.flow.MutableStateFlow

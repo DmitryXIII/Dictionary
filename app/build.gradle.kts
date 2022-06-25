@@ -43,6 +43,7 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":history"))
     implementation(project(":worddetails"))
+    implementation(project(":wordsearching"))
 
     implementation(Dependencies.RETROFIT_DEP)
     implementation(Dependencies.RETROFIT_GSON_CONVERTER_DEP)
@@ -51,25 +52,11 @@ dependencies {
 
     implementation(Dependencies.KOIN_DEP)
 
-    implementation(Dependencies.SPINKIT_DEP)
-
-    implementation(Dependencies.LOTTIE_DEP)
-
-    implementation(Dependencies.COROUTINES_ANDROID_DEP)
-
     implementation(Dependencies.ROOM_RUNTIME_DEP)
     implementation(Dependencies.ROOM_KTX_DEP)
     kapt(Dependencies.ROOM_COMPILER_DEP)
 
-    implementation(Dependencies.COIL_DEP)
-
-    implementation(Dependencies.LIFECYCLE_KTX_DEP)
-
-    implementation(Dependencies.FRAGMENT_KTX_DEP)
-    implementation(Dependencies.CORE_KTX_DEP)
     implementation(Dependencies.APPCOMPAT_DEP)
-    implementation(Dependencies.ANDROID_MATERIAL_DEP)
-    implementation(Dependencies.CONSTRAINT_LAYOUT_DEP)
     testImplementation(Dependencies.JUNIT_DEP)
     androidTestImplementation(Dependencies.TEST_JUNIT_DEP)
     androidTestImplementation(Dependencies.TEST_ESPRESSO_DEP)

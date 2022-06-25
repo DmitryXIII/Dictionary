@@ -1,4 +1,4 @@
-package com.ineedyourcode.dictionary.ui.wordsearching
+package com.ineedyourcode.wordsearching.ui
 
 import android.os.Bundle
 import android.view.View
@@ -6,10 +6,10 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ineedyourcode.core.ui.BaseFragment
-import com.ineedyourcode.dictionary.databinding.FragmentWordSearchingBinding
-import com.ineedyourcode.domain.entity.SearchingResultItem
 import com.ineedyourcode.core.ui.uils.ErrorMapper
 import com.ineedyourcode.core.ui.uils.showErrorSnack
+import com.ineedyourcode.domain.entity.SearchingResultItem
+import com.ineedyourcode.wordsearching.databinding.FragmentWordSearchingBinding
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
 
 private const val ANIMATION_DURATION = 100L

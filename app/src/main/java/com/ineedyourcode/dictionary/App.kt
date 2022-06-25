@@ -1,7 +1,6 @@
 package com.ineedyourcode.dictionary
 
 import android.app.Application
-import android.content.Context
 import com.ineedyourcode.dictionary.di.datasourceModule
 import com.ineedyourcode.dictionary.di.retrofitModule
 import com.ineedyourcode.dictionary.di.roomModule
@@ -19,6 +18,3 @@ class App : Application() {
         }
     }
 }
-
-val Context.app: App
-    get() = applicationContext as App

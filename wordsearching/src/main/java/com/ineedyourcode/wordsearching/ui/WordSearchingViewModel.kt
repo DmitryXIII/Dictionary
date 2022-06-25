@@ -1,4 +1,4 @@
-package com.ineedyourcode.dictionary.ui.wordsearching
+package com.ineedyourcode.wordsearching.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle

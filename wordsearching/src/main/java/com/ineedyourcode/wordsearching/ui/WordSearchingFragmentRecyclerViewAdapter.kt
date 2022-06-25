@@ -1,11 +1,11 @@
-package com.ineedyourcode.dictionary.ui.wordsearching
+package com.ineedyourcode.wordsearching.ui
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.ineedyourcode.dictionary.databinding.FragmentSearchResultItemBinding
 import com.ineedyourcode.domain.entity.SearchingResultItem
+import com.ineedyourcode.wordsearching.databinding.FragmentSearchResultItemBinding
 
 class WordSearchingFragmentRecyclerViewAdapter(private val clickListener : ((SearchingResultItem) -> Unit)) :
     RecyclerView.Adapter<WordSearchingFragmentRecyclerViewAdapter.WordTranslatingViewHolder>() {
