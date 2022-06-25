@@ -2,6 +2,7 @@ package com.ineedyourcode.worddetails.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,8 +10,10 @@ import com.ineedyourcode.core.ui.BaseFragment
 import com.ineedyourcode.core.ui.uils.ErrorMapper
 import com.ineedyourcode.core.ui.uils.setFavoriteIcon
 import com.ineedyourcode.core.ui.uils.showErrorSnack
+import com.ineedyourcode.core.ui.uils.viewById
 import com.ineedyourcode.domain.entity.HistoryItem
 import com.ineedyourcode.domain.entity.WordMeaning
+import com.ineedyourcode.worddetails.R
 import com.ineedyourcode.worddetails.databinding.FragmentWordDetailsBinding
 import org.koin.android.scope.AndroidScopeComponent
 import org.koin.androidx.scope.fragmentScope
@@ -49,7 +52,8 @@ class WordDetailsFragment :
                 viewModel.getWordMeanings(word).observe(viewLifecycleOwner) { state ->
                     renderData(state)
                 }
-                binding.detailsWordTitleTextView.text = word
+                val currentWord by viewById<TextView>(R.id.details_word_title_text_view)
+                currentWord.text = word
             }
         }
 
