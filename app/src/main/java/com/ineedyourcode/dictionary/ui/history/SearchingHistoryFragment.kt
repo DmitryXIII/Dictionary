@@ -8,14 +8,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ineedyourcode.dictionary.databinding.FragmentSearchingHistoryBinding
-import com.ineedyourcode.dictionary.domain.entity.HistoryItem
+import com.ineedyourcode.domain.entity.HistoryItem
 import com.ineedyourcode.dictionary.ui.BaseFragment
 import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
 import com.ineedyourcode.dictionary.ui.uils.setOnTypeTextListener
 import com.ineedyourcode.dictionary.ui.uils.showErrorSnack
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel

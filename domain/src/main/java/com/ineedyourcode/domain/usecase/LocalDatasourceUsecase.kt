@@ -1,3 +1,3 @@
-package com.ineedyourcode.dictionary.domain.usecase
+package com.ineedyourcode.domain.usecase
 
 interface LocalDatasourceUsecase : DetailsUsecase, HistoryUsecase

@@ -6,8 +6,8 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ineedyourcode.dictionary.databinding.FragmentWordDetailsBinding
-import com.ineedyourcode.dictionary.domain.entity.HistoryItem
-import com.ineedyourcode.dictionary.domain.entity.WordMeaning
+import com.ineedyourcode.domain.entity.HistoryItem
+import com.ineedyourcode.domain.entity.WordMeaning
 import com.ineedyourcode.dictionary.ui.BaseFragment
 import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
 import com.ineedyourcode.dictionary.ui.uils.setFavoriteIcon

@@ -1,6 +1,6 @@
 package com.ineedyourcode.dictionary.data.datasource.remote
 
-import com.ineedyourcode.dictionary.domain.usecase.RemoteDatasourceUsecase
+import com.ineedyourcode.domain.usecase.RemoteDatasourceUsecase
 
 class RetrofitDataSource(
     private val retrofit: SkyengApi,

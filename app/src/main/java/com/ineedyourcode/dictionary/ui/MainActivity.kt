@@ -7,8 +7,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.ineedyourcode.dictionary.R
-import com.ineedyourcode.dictionary.domain.entity.HistoryItem
-import com.ineedyourcode.dictionary.domain.entity.SearchingResultItem
+import com.ineedyourcode.domain.entity.HistoryItem
+import com.ineedyourcode.domain.entity.SearchingResultItem
 import com.ineedyourcode.dictionary.ui.history.SearchingHistoryFragment
 import com.ineedyourcode.dictionary.ui.uils.ActivityContract
 import com.ineedyourcode.dictionary.ui.uils.NoConnectionDialogFragment

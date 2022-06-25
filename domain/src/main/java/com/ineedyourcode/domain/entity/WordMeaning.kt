@@ -1,4 +1,4 @@
-package com.ineedyourcode.dictionary.domain.entity
+package com.ineedyourcode.domain.entity
 
 data class WordMeaning(
     val ID : String,

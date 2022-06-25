@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ineedyourcode.dictionary.databinding.FragmentSearchingHistoryItemBinding
-import com.ineedyourcode.dictionary.domain.entity.HistoryItem
+import com.ineedyourcode.domain.entity.HistoryItem
 import com.ineedyourcode.dictionary.ui.uils.setFavoriteIcon
 
 class SearchingHistoryAdapter(

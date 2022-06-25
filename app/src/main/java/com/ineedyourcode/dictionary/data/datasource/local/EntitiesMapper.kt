@@ -2,9 +2,9 @@ package com.ineedyourcode.dictionary.data.datasource.local
 
 import com.ineedyourcode.dictionary.data.datasource.local.entities.HistoryEntity
 import com.ineedyourcode.dictionary.data.datasource.local.entities.WordMeaningEntity
-import com.ineedyourcode.dictionary.domain.entity.HistoryItem
-import com.ineedyourcode.dictionary.domain.entity.SearchingResultItem
-import com.ineedyourcode.dictionary.domain.entity.WordMeaning
+import com.ineedyourcode.domain.entity.HistoryItem
+import com.ineedyourcode.domain.entity.SearchingResultItem
+import com.ineedyourcode.domain.entity.WordMeaning
 
 class EntitiesMapper {
     fun convertSearchingResultItemToHistoryEntity(

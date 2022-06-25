@@ -3,9 +3,9 @@ package com.ineedyourcode.dictionary.ui.wordsearching
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.ineedyourcode.dictionary.domain.entity.ResponseCodes
-import com.ineedyourcode.dictionary.domain.entity.SearchingResultItem
-import com.ineedyourcode.dictionary.domain.usecase.WordSearchingUsecase
+import com.ineedyourcode.domain.entity.ResponseCodes
+import com.ineedyourcode.domain.entity.SearchingResultItem
+import com.ineedyourcode.domain.usecase.WordSearchingUsecase
 import com.ineedyourcode.dictionary.ui.AppState
 import com.ineedyourcode.dictionary.ui.ViewModelContract
 import com.ineedyourcode.dictionary.ui.uils.ErrorMapper

@@ -1,7 +1,7 @@
 package com.ineedyourcode.dictionary.ui.uils
 
 import com.ineedyourcode.dictionary.R
-import com.ineedyourcode.dictionary.domain.entity.ResponseCodes
+import com.ineedyourcode.domain.entity.ResponseCodes
 
 @Suppress("UNCHECKED_CAST")
 sealed class ErrorMapper {

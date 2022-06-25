@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.ineedyourcode.dictionary.databinding.FragmentWordDetailsItemBinding
-import com.ineedyourcode.dictionary.domain.entity.WordMeaning
+import com.ineedyourcode.domain.entity.WordMeaning
 
 private const val IMAGE_URL_PREFIX = "https:"
 

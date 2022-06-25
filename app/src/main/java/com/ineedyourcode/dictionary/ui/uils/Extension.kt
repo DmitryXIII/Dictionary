@@ -6,7 +6,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import com.google.android.material.snackbar.Snackbar
-import com.ineedyourcode.dictionary.domain.entity.HistoryItem
+import com.ineedyourcode.domain.entity.HistoryItem
 import kotlinx.coroutines.flow.MutableStateFlow
 
 fun View.showErrorSnack(message: ErrorMapper) {

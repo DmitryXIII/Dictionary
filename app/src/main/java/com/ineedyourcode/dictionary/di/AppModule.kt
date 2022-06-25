@@ -8,10 +8,10 @@ import com.ineedyourcode.dictionary.data.datasource.remote.RetrofitDataSource
 import com.ineedyourcode.dictionary.data.datasource.remote.SearchingDtoMapper
 import com.ineedyourcode.dictionary.data.datasource.remote.SkyengApi
 import com.ineedyourcode.dictionary.data.repository.WordGateway
-import com.ineedyourcode.dictionary.domain.usecase.DetailsUsecase
-import com.ineedyourcode.dictionary.domain.usecase.GatewayUsecase
-import com.ineedyourcode.dictionary.domain.usecase.HistoryUsecase
-import com.ineedyourcode.dictionary.domain.usecase.WordSearchingUsecase
+import com.ineedyourcode.domain.usecase.DetailsUsecase
+import com.ineedyourcode.domain.usecase.GatewayUsecase
+import com.ineedyourcode.domain.usecase.HistoryUsecase
+import com.ineedyourcode.domain.usecase.WordSearchingUsecase
 import com.ineedyourcode.dictionary.ui.history.SearchingHistoryViewModel
 import com.ineedyourcode.dictionary.ui.worddetails.WordDetailsViewModel
 import com.ineedyourcode.dictionary.ui.wordsearching.WordSearchingViewModel

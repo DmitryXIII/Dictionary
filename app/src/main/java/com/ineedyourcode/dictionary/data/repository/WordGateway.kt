@@ -2,10 +2,10 @@ package com.ineedyourcode.dictionary.data.repository
 
 import com.ineedyourcode.dictionary.data.datasource.local.RoomDataSource
 import com.ineedyourcode.dictionary.data.datasource.remote.RetrofitDataSource
-import com.ineedyourcode.dictionary.domain.entity.HistoryItem
-import com.ineedyourcode.dictionary.domain.entity.SearchingResultItem
-import com.ineedyourcode.dictionary.domain.entity.WordMeaning
-import com.ineedyourcode.dictionary.domain.usecase.GatewayUsecase
+import com.ineedyourcode.domain.entity.HistoryItem
+import com.ineedyourcode.domain.entity.SearchingResultItem
+import com.ineedyourcode.domain.entity.WordMeaning
+import com.ineedyourcode.domain.usecase.GatewayUsecase
 import kotlinx.coroutines.flow.Flow
 
 class WordGateway(

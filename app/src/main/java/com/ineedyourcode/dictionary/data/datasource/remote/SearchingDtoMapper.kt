@@ -2,8 +2,8 @@ package com.ineedyourcode.dictionary.data.datasource.remote
 
 import com.ineedyourcode.dictionary.data.datasource.remote.dto.MeaningDto
 import com.ineedyourcode.dictionary.data.datasource.remote.dto.SearchingResultItemDto
-import com.ineedyourcode.dictionary.domain.entity.SearchingResultItem
-import com.ineedyourcode.dictionary.domain.entity.WordMeaning
+import com.ineedyourcode.domain.entity.SearchingResultItem
+import com.ineedyourcode.domain.entity.WordMeaning
 
 class SearchingDtoMapper {
     fun convertResultDtoToEntity(result: SearchingResultItemDto): SearchingResultItem =

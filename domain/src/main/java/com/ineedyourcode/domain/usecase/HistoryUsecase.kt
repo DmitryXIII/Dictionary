@@ -1,7 +1,7 @@
-package com.ineedyourcode.dictionary.domain.usecase
+package com.ineedyourcode.domain.usecase
 
-import com.ineedyourcode.dictionary.domain.entity.HistoryItem
-import com.ineedyourcode.dictionary.domain.entity.SearchingResultItem
+import com.ineedyourcode.domain.entity.HistoryItem
+import com.ineedyourcode.domain.entity.SearchingResultItem
 import kotlinx.coroutines.flow.Flow
 
 interface HistoryUsecase: FavoriteUsecase {

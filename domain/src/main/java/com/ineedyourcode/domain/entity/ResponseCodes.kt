@@ -1,4 +1,4 @@
-package com.ineedyourcode.dictionary.domain.entity
+package com.ineedyourcode.domain.entity
 
 enum class ResponseCodes(val code: String) {
     INVALID_REQUEST("300"),

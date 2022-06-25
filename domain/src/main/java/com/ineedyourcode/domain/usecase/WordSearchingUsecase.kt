@@ -1,6 +1,6 @@
-package com.ineedyourcode.dictionary.domain.usecase
+package com.ineedyourcode.domain.usecase
 
-import com.ineedyourcode.dictionary.domain.entity.SearchingResultItem
+import com.ineedyourcode.domain.entity.SearchingResultItem
 
 interface WordSearchingUsecase : RemoteDatasourceUsecase {
     fun saveSearchingResultToHistory(searchingResultItem: SearchingResultItem)

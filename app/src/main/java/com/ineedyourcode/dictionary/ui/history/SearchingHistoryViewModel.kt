@@ -1,7 +1,7 @@
 package com.ineedyourcode.dictionary.ui.history
 
-import com.ineedyourcode.dictionary.domain.entity.HistoryItem
-import com.ineedyourcode.dictionary.domain.usecase.HistoryUsecase
+import com.ineedyourcode.domain.entity.HistoryItem
+import com.ineedyourcode.domain.usecase.HistoryUsecase
 import com.ineedyourcode.dictionary.ui.ViewModelContract
 import kotlinx.coroutines.flow.Flow
 

@@ -6,7 +6,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ineedyourcode.dictionary.databinding.FragmentWordSearchingBinding
-import com.ineedyourcode.dictionary.domain.entity.SearchingResultItem
+import com.ineedyourcode.domain.entity.SearchingResultItem
 import com.ineedyourcode.dictionary.ui.BaseFragment
 import com.ineedyourcode.dictionary.ui.uils.ErrorMapper
 import com.ineedyourcode.dictionary.ui.uils.showErrorSnack

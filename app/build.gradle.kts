@@ -40,6 +40,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":domain"))
+
     implementation(Dependencies.RETROFIT_DEP)
     implementation(Dependencies.RETROFIT_GSON_CONVERTER_DEP)
     implementation(Dependencies.LOGGING_INTERCEPTOR_DEP)

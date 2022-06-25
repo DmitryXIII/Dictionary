@@ -2,10 +2,10 @@ package com.ineedyourcode.dictionary.data.datasource.local
 
 import com.ineedyourcode.dictionary.data.datasource.local.dao.HistoryDao
 import com.ineedyourcode.dictionary.data.datasource.local.dao.WordMeaningDao
-import com.ineedyourcode.dictionary.domain.entity.HistoryItem
-import com.ineedyourcode.dictionary.domain.entity.SearchingResultItem
-import com.ineedyourcode.dictionary.domain.entity.WordMeaning
-import com.ineedyourcode.dictionary.domain.usecase.LocalDatasourceUsecase
+import com.ineedyourcode.domain.entity.HistoryItem
+import com.ineedyourcode.domain.entity.SearchingResultItem
+import com.ineedyourcode.domain.entity.WordMeaning
+import com.ineedyourcode.domain.usecase.LocalDatasourceUsecase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
