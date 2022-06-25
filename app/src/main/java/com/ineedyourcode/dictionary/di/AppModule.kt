@@ -1,13 +1,13 @@
 package com.ineedyourcode.dictionary.di
 
 import com.ineedyourcode.dictionary.BuildConfig
-import com.ineedyourcode.dictionary.data.datasource.local.DictionaryDatabase
-import com.ineedyourcode.dictionary.data.datasource.local.EntitiesMapper
-import com.ineedyourcode.dictionary.data.datasource.local.RoomDataSource
-import com.ineedyourcode.dictionary.data.datasource.remote.RetrofitDataSource
-import com.ineedyourcode.dictionary.data.datasource.remote.SearchingDtoMapper
-import com.ineedyourcode.dictionary.data.datasource.remote.SkyengApi
-import com.ineedyourcode.dictionary.data.repository.WordGateway
+import com.ineedyourcode.core.data.datasource.local.DictionaryDatabase
+import com.ineedyourcode.core.data.datasource.local.EntitiesMapper
+import com.ineedyourcode.core.data.datasource.local.RoomDataSource
+import com.ineedyourcode.core.data.datasource.remote.RetrofitDataSource
+import com.ineedyourcode.core.data.datasource.remote.SearchingDtoMapper
+import com.ineedyourcode.core.data.datasource.remote.SkyengApi
+import com.ineedyourcode.core.data.repository.WordGateway
 import com.ineedyourcode.domain.usecase.DetailsUsecase
 import com.ineedyourcode.domain.usecase.GatewayUsecase
 import com.ineedyourcode.domain.usecase.HistoryUsecase
