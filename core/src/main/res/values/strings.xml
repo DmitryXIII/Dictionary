@@ -3,4 +3,6 @@
     <string name="error_301_message">Введите слово для перевода</string>
     <string name="ok">OK</string>
     <string name="no_is_main_controller">Активити должна имплементировать ActivityContract</string>
+    <string name="view_dont_created">View не существует</string>
+    <string name="cant_find_view_id_in_root">"id 1%d отсутствует в корневом View"</string>
 </resources>

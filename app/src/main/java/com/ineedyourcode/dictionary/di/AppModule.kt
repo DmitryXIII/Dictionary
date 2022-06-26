@@ -12,7 +12,9 @@ import com.ineedyourcode.domain.usecase.DetailsUsecase
 import com.ineedyourcode.domain.usecase.GatewayUsecase
 import com.ineedyourcode.domain.usecase.HistoryUsecase
 import com.ineedyourcode.domain.usecase.WordSearchingUsecase
+import com.ineedyourcode.history.ui.SearchingHistoryFragment
 import com.ineedyourcode.history.ui.SearchingHistoryViewModel
+import com.ineedyourcode.worddetails.ui.WordDetailsFragment
 import com.ineedyourcode.worddetails.ui.WordDetailsViewModel
 import com.ineedyourcode.wordsearching.ui.WordSearchingViewModel
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -27,35 +29,43 @@ import retrofit2.converter.gson.GsonConverterFactory
 private const val BASE_URL = "https://dictionary.skyeng.ru/api/public/v1/"
 private const val BUILD_CONFIG_TYPE_DEBUG = "debug"
 
-val viewModelModule = module {
+val historyModule = module {
+    scope<SearchingHistoryFragment> {
+        viewModel {
+            SearchingHistoryViewModel(gateway = get())
+        }
+
+        scoped<HistoryUsecase> {
+            WordGateway(remoteDataSource = get(), localDataSource = get())
+        }
+    }
+}
+
+val searchingModule = module {
     viewModel {
         WordSearchingViewModel(gateway = get(),
             savedStateHandle = get())
     }
 
-    viewModel {
-        SearchingHistoryViewModel(gateway = get())
+    single<WordSearchingUsecase> {
+        WordGateway(remoteDataSource = get(), localDataSource = get())
     }
+}
 
-    viewModel {
-        WordDetailsViewModel(gateway = get())
+
+val detailsModule = module {
+    scope<WordDetailsFragment> {
+        viewModel {
+            WordDetailsViewModel(gateway = get())
+        }
+        scoped<DetailsUsecase> {
+            WordGateway(remoteDataSource = get(), localDataSource = get())
+        }
     }
 }
 
 val datasourceModule = module {
     single<GatewayUsecase> {
-        WordGateway(remoteDataSource = get(), localDataSource = get())
-    }
-
-    single<HistoryUsecase> {
-        WordGateway(remoteDataSource = get(), localDataSource = get())
-    }
-
-    single<WordSearchingUsecase> {
-        WordGateway(remoteDataSource = get(), localDataSource = get())
-    }
-
-    single<DetailsUsecase> {
         WordGateway(remoteDataSource = get(), localDataSource = get())
     }
 
