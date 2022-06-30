@@ -44,18 +44,16 @@ dependencies {
     implementation(project(":history"))
     implementation(project(":worddetails"))
     implementation(project(":wordsearching"))
-
     implementation(Dependencies.RETROFIT_DEP)
     implementation(Dependencies.RETROFIT_GSON_CONVERTER_DEP)
     implementation(Dependencies.LOGGING_INTERCEPTOR_DEP)
     implementation(Dependencies.RETROFIT_COROUTINES_ADAPTER_DEP)
-
     implementation(Dependencies.KOIN_DEP)
-
+    implementation(Dependencies.ANDROID_MATERIAL_DEP)
+    implementation(Dependencies.SPLASH_SCREEN_DEP)
     implementation(Dependencies.ROOM_RUNTIME_DEP)
     implementation(Dependencies.ROOM_KTX_DEP)
     kapt(Dependencies.ROOM_COMPILER_DEP)
-
     implementation(Dependencies.APPCOMPAT_DEP)
     testImplementation(Dependencies.JUNIT_DEP)
     androidTestImplementation(Dependencies.TEST_JUNIT_DEP)

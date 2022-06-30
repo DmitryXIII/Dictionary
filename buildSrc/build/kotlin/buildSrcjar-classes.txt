@@ -1,1 +1,0 @@
-D:\MyAndroid\Dictionary\buildSrc\build\classes\kotlin\main\Dependencies.class
