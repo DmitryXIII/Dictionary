@@ -27,7 +27,7 @@ fun View.hideKeyboard(): Boolean {
     return inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
 }
 
-fun androidx.appcompat.widget.SearchView.setOnTypeTextListener(stateFlow: MutableStateFlow<String>) {
+fun SearchView.setOnTypeTextListener(stateFlow: MutableStateFlow<String>) {
     this.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String?): Boolean {
             query?.let {
